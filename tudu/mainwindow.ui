@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tabMonth">
      <attribute name="title">
@@ -69,25 +69,52 @@
          <property name="locale">
           <locale language="Filipino" country="Philippines"/>
          </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item alignment="Qt::AlignHCenter">
-        <widget class="QTextEdit" name="teTuesday"/>
+        <widget class="QTextEdit" name="teTuesday">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="teWednesday"/>
+        <widget class="QTextEdit" name="teWednesday">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="teThursday"/>
+        <widget class="QTextEdit" name="teThursday">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="teFriday"/>
+        <widget class="QTextEdit" name="teFriday">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="teSaturday"/>
+        <widget class="QTextEdit" name="teSaturday">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="teSunday"/>
+        <widget class="QTextEdit" name="teSunday">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

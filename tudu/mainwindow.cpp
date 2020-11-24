@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QDate>
 #include <QColorDialog>
-
+#include<iostream>
 
 
 MainWindow::MainWindow(QWidget *parent) :
