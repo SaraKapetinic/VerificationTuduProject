@@ -4,6 +4,8 @@
 #include <QColorDialog>
 #include<iostream>
 
+#define NUM_OF_WEEKDAYS 7
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,32 +16,41 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QDate currentDate = ui->calendarMonths->selectedDate();
 
-    ui->teMonday->setStyleSheet("background-color: rgba(0,0,0, 0.15);");
+    ui->day_1->setStyleSheet("background-color: rgba(0,0,0, 0.15);");
+//    TODO: change bg color of the current day
 
-    ui->teMonday->setAlignment(Qt::AlignCenter);
-    ui->teTuesday->setAlignment(Qt::AlignCenter);
-    ui->teWednesday->setAlignment(Qt::AlignCenter);
-    ui->teThursday->setAlignment(Qt::AlignCenter);
-    ui->teFriday->setAlignment(Qt::AlignCenter);
-    ui->teSaturday->setAlignment(Qt::AlignCenter);
-    ui->teSunday->setAlignment(Qt::AlignCenter);
+    ui->day_1->setAlignment(Qt::AlignCenter);
+    ui->day_2->setAlignment(Qt::AlignCenter);
+    ui->day_3->setAlignment(Qt::AlignCenter);
+    ui->day_4->setAlignment(Qt::AlignCenter);
+    ui->day_5->setAlignment(Qt::AlignCenter);
+    ui->day_6->setAlignment(Qt::AlignCenter);
+    ui->day_7->setAlignment(Qt::AlignCenter);
 
-    ui->teMonday->insertPlainText("Monday");
-    ui->teTuesday->insertPlainText("Tuesday");
-    ui->teWednesday->insertPlainText("Wednesday");
-    ui->teThursday->insertPlainText("Thursday");
-    ui->teFriday->insertPlainText("Friday");
-    ui->teSaturday->insertPlainText("Saturday");
-    ui->teSunday->insertPlainText("Sunday");
+    // Adding a day name labels
+    ui->day_1->insertPlainText("Monday");
+    ui->day_2->insertPlainText("Tuesday");
+    ui->day_3->insertPlainText("Wednesday");
+    ui->day_4->insertPlainText("Thursday");
+    ui->day_5->insertPlainText("Friday");
+    ui->day_6->insertPlainText("Saturday");
+    ui->day_7->insertPlainText("Sunday");
 
+    int currentDayOfWeek = currentDate.dayOfWeek();
+    int numOfDays = NUM_OF_WEEKDAYS - currentDayOfWeek;
+    QVector<int> daysAdded(8);
+    for (int i=7; i>=0; i--) {
+        daysAdded[i] = numOfDays;
+        numOfDays--;
+    }
 
-    ui->teMonday->append(currentDate.toString("dd.MM.yyyy."));
-    ui->teTuesday->append(currentDate.addDays(1).toString("dd.MM.yy."));
-    ui->teWednesday->append(currentDate.addDays(2).toString("dd.MM.yy."));
-    ui->teThursday->append(currentDate.addDays(3).toString("dd.MM.yy."));
-    ui->teFriday->append(currentDate.addDays(4).toString("dd.MM.yy."));
-    ui->teSaturday->append(currentDate.addDays(5).toString("dd.MM.yy."));
-    ui->teSunday->append(currentDate.addDays(6).toString("dd.MM.yy."));
+    ui->day_1->append(currentDate.addDays(daysAdded[1]).toString("dd.MM.yyyy."));
+    ui->day_2->append(currentDate.addDays(daysAdded[2]).toString("dd.MM.yyyy."));
+    ui->day_3->append(currentDate.addDays(daysAdded[3]).toString("dd.MM.yyyy."));
+    ui->day_4->append(currentDate.addDays(daysAdded[4]).toString("dd.MM.yyyy."));
+    ui->day_5->append(currentDate.addDays(daysAdded[5]).toString("dd.MM.yyyy."));
+    ui->day_6->append(currentDate.addDays(daysAdded[6]).toString("dd.MM.yyyy."));
+    ui->day_7->append(currentDate.addDays(daysAdded[7]).toString("dd.MM.yyyy."));
 
 
 
