@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tabMonth">
      <attribute name="title">
@@ -55,7 +55,7 @@
       </property>
       <layout class="QHBoxLayout" name="weekLayout">
        <item alignment="Qt::AlignHCenter">
-        <widget class="QTextEdit" name="teMonday">
+        <widget class="QTextEdit" name="day_1">
          <property name="autoFillBackground">
           <bool>false</bool>
          </property>
@@ -68,42 +68,42 @@
         </widget>
        </item>
        <item alignment="Qt::AlignHCenter">
-        <widget class="QTextEdit" name="teTuesday">
+        <widget class="QTextEdit" name="day_2">
          <property name="readOnly">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="teWednesday">
+        <widget class="QTextEdit" name="day_3">
          <property name="readOnly">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="teThursday">
+        <widget class="QTextEdit" name="day_4">
          <property name="readOnly">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="teFriday">
+        <widget class="QTextEdit" name="day_5">
          <property name="readOnly">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="teSaturday">
+        <widget class="QTextEdit" name="day_6">
          <property name="readOnly">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="teSunday">
+        <widget class="QTextEdit" name="day_7">
          <property name="readOnly">
           <bool>true</bool>
          </property>
