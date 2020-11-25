@@ -33,13 +33,6 @@
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="QCalendarWidget" name="calendarMonths">
-        <property name="selectedDate">
-         <date>
-          <year>2020</year>
-          <month>11</month>
-          <day>24</day>
-         </date>
-        </property>
         <property name="gridVisible">
          <bool>true</bool>
         </property>
