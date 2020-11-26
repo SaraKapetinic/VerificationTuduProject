@@ -15,6 +15,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+  void on_addTaskButtonClicked();
+
 private:
     Ui::MainWindow *ui;
 };

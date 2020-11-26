@@ -2,7 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QDate>
 #include <QColorDialog>
-#include<iostream>
+#include <iostream>
+#include <QTextEdit>
 
 #define NUM_OF_WEEKDAYS 7
 
@@ -51,9 +52,19 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->day_5->append(currentDate.addDays(daysAdded[5]).toString("dd.MM.yyyy."));
     ui->day_6->append(currentDate.addDays(daysAdded[6]).toString("dd.MM.yyyy."));
     ui->day_7->append(currentDate.addDays(daysAdded[7]).toString("dd.MM.yyyy."));
+}
 
+void MainWindow::on_addTaskButtonClicked()
+{
+    printf("Adding a new task to TUDU\n");
+    QTextEdit *frame = new QTextEdit();
+    frame->setPlaceholderText("Add task description");
+    frame->placeholderText();
+    frame->setMinimumHeight(20);
+    frame->setMaximumHeight(100);
 
-
+    ui->verticalLayoutTUDU->addWidget(frame,Qt::AlignTop);
+    // do other init stuff
 }
 
 MainWindow::~MainWindow()
