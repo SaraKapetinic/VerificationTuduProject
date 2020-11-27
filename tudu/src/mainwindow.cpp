@@ -9,13 +9,6 @@
 
 #define NUM_OF_WEEKDAYS 7
 
-// Function to return children of parent widget based on search regex
-QList<QTextEdit *> widgets(QWidget* parent, QString search)
-{
-    QRegularExpression exp(search);
-    return parent->findChildren<QTextEdit *>(exp);
-}
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -23,15 +16,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     QDate currentDate = ui->calendarMonths->selectedDate();
-    QString dayNames[] = {
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
-    };
 
     int currentDayOfWeek = currentDate.dayOfWeek();
 
@@ -42,25 +26,27 @@ MainWindow::MainWindow(QWidget *parent) :
         numOfDays--;
     }
 
-    QWidget* tabWeekWidget = ui->tabWeek;
-    // Getting children of tabWeekWidget
-    auto children = widgets(tabWeekWidget, "day");
+    QStringList days = {"Monday\n", "Tuesday\n", "Wednesday\n", "Thursday\n", "Friday\n", "Saturday\n", "Sunday\n"};
 
-    for (auto i=0;i<children.size();i++) {
-        // Aligning to center
-        children[i]->setAlignment(Qt::AlignCenter);
-
-        // Adding a day name labels
-        children[i]->insertPlainText(dayNames[i]);
-
-        // Adding date to corresponding day
-        children[i]->append(currentDate.addDays(daysAdded[i+1]).toString("dd.MM.yyyy."));
-
-        // Highlight current day
-        if(currentDayOfWeek == i+1){
-            children[i]->setStyleSheet("background-color: rgba(0, 0, 0, 0.15)");
-        }
+    // Make header text Day\n Date
+    for(int i = 0;i<days.size();i++){
+        days[i].append(currentDate.addDays(daysAdded[i+1]).toString("dd.MM.yyyy."));
     }
+
+    // Set column headers
+    ui->tableWidget->setHorizontalHeaderLabels(days);
+
+    // Set row headers
+    ui->tableWidget->setVerticalHeaderLabels(
+                {"07.00", "08.00", "09.00", "10.00", "11.00", "12.00", "13.00", "14.00", "15.00", "16.00", "17.00", "18.00", "19.00", "20.00", "21.00", "22.00", "23.00"}
+                );
+
+    // Make table fill entire widget
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    // Example of text in particular cell (TODO)
+    ui->tableWidget->setItem(1,1, new QTableWidgetItem("Tekst iz taska"));
+
 }
 
 void MainWindow::on_addTaskButtonClicked()
