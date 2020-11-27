@@ -4,9 +4,17 @@
 #include <QColorDialog>
 #include <iostream>
 #include <QTextEdit>
+#include <regex>
+#include <QRegularExpression>
 
 #define NUM_OF_WEEKDAYS 7
 
+// Function to return children of parent widget based on search regex
+QList<QTextEdit *> widgets(QWidget* parent, QString search)
+{
+    QRegularExpression exp(search);
+    return parent->findChildren<QTextEdit *>(exp);
+}
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,30 +22,19 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-
     QDate currentDate = ui->calendarMonths->selectedDate();
-
-    ui->day_1->setStyleSheet("background-color: rgba(0,0,0, 0.15);");
-//    TODO: change bg color of the current day
-
-    ui->day_1->setAlignment(Qt::AlignCenter);
-    ui->day_2->setAlignment(Qt::AlignCenter);
-    ui->day_3->setAlignment(Qt::AlignCenter);
-    ui->day_4->setAlignment(Qt::AlignCenter);
-    ui->day_5->setAlignment(Qt::AlignCenter);
-    ui->day_6->setAlignment(Qt::AlignCenter);
-    ui->day_7->setAlignment(Qt::AlignCenter);
-
-    // Adding a day name labels
-    ui->day_1->insertPlainText("Monday");
-    ui->day_2->insertPlainText("Tuesday");
-    ui->day_3->insertPlainText("Wednesday");
-    ui->day_4->insertPlainText("Thursday");
-    ui->day_5->insertPlainText("Friday");
-    ui->day_6->insertPlainText("Saturday");
-    ui->day_7->insertPlainText("Sunday");
+    QString dayNames[] = {
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+    };
 
     int currentDayOfWeek = currentDate.dayOfWeek();
+
     int numOfDays = NUM_OF_WEEKDAYS - currentDayOfWeek;
     QVector<int> daysAdded(8);
     for (int i=7; i>=0; i--) {
@@ -45,13 +42,25 @@ MainWindow::MainWindow(QWidget *parent) :
         numOfDays--;
     }
 
-    ui->day_1->append(currentDate.addDays(daysAdded[1]).toString("dd.MM.yyyy."));
-    ui->day_2->append(currentDate.addDays(daysAdded[2]).toString("dd.MM.yyyy."));
-    ui->day_3->append(currentDate.addDays(daysAdded[3]).toString("dd.MM.yyyy."));
-    ui->day_4->append(currentDate.addDays(daysAdded[4]).toString("dd.MM.yyyy."));
-    ui->day_5->append(currentDate.addDays(daysAdded[5]).toString("dd.MM.yyyy."));
-    ui->day_6->append(currentDate.addDays(daysAdded[6]).toString("dd.MM.yyyy."));
-    ui->day_7->append(currentDate.addDays(daysAdded[7]).toString("dd.MM.yyyy."));
+    QWidget* tabWeekWidget = ui->tabWeek;
+    // Getting children of tabWeekWidget
+    auto children = widgets(tabWeekWidget, "day");
+
+    for (auto i=0;i<children.size();i++) {
+        // Aligning to center
+        children[i]->setAlignment(Qt::AlignCenter);
+
+        // Adding a day name labels
+        children[i]->insertPlainText(dayNames[i]);
+
+        // Adding date to corresponding day
+        children[i]->append(currentDate.addDays(daysAdded[i+1]).toString("dd.MM.yyyy."));
+
+        // Highlight current day
+        if(currentDayOfWeek == i+1){
+            children[i]->setStyleSheet("background-color: rgba(0, 0, 0, 0.15)");
+        }
+    }
 }
 
 void MainWindow::on_addTaskButtonClicked()
