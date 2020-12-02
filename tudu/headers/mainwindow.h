@@ -18,6 +18,9 @@ public:
 public slots:
   void on_addTaskButtonClicked();
 
+private slots:
+  void on_tableWidget_cellDoubleClicked(int row, int column);
+
 private:
     Ui::MainWindow *ui;
 };
