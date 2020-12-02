@@ -6,6 +6,7 @@
 #include <QTextEdit>
 #include <regex>
 #include <QRegularExpression>
+#include "headers/addtaskform.h"
 
 #define NUM_OF_WEEKDAYS 7
 
@@ -27,7 +28,8 @@ MainWindow::MainWindow(QWidget *parent) :
         numOfDays--;
     }
 
-    QStringList days = {"Monday\n", "Tuesday\n", "Wednesday\n", "Thursday\n", "Friday\n", "Saturday\n", "Sunday\n"};
+    QStringList days = {"Monday\n", "Tuesday\n", "Wednesday\n", "Thursday\n",
+                        "Friday\n", "Saturday\n", "Sunday\n"};
 
     // Make header text Day\n Date
     for(int i = 0;i<days.size();i++){
@@ -72,7 +74,11 @@ MainWindow::~MainWindow()
 void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
 {
 
-    // Window that pops up on double click
+    AddTaskForm mDialog;
+    mDialog.setModal(true);
+    mDialog.exec();
+
+    /*// Window that pops up on double click
     QWidget *taskWindow = new QWidget();
 
     // Set window title
@@ -113,5 +119,5 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
 
     taskWindow->setLayout(layout);
 
-    taskWindow->show();
+    taskWindow->show();*/
 }
