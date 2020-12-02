@@ -63,6 +63,10 @@ void MainWindow::on_addTaskButtonClicked()
 
     ui->verticalLayoutTUDU->addWidget(frame,Qt::AlignTop);
     // do other init stuff
+
+//    AddTaskForm mDialog;
+//    mDialog.setModal(true);
+//    mDialog.exec();
 }
 
 MainWindow::~MainWindow()
