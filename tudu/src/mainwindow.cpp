@@ -40,12 +40,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableWidget->setHorizontalHeaderLabels(days);
 
     // Set row headers
-    ui->tableWidget->setVerticalHeaderLabels(
-                {"07.00", "08.00", "09.00", "10.00",
-                 "11.00", "12.00", "13.00", "14.00",
-                 "15.00", "16.00", "17.00", "18.00",
-                 "19.00", "20.00", "21.00", "22.00", "23.00"}
-                );
+    QStringList verticalHeaders;
+    QString time;
+    for (int i=0; i<24; i++) {
+        for (int j=0; j<60; j+= 15) {
+            time = "";
+            time.sprintf("%02d.%02d", i, j);
+//            std::cout << time.toLocal8Bit().data() << std::endl;
+            verticalHeaders << time;
+        }
+    }
+    ui->tableWidget->setVerticalHeaderLabels(verticalHeaders);
 
     // Make table fill entire widget
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
