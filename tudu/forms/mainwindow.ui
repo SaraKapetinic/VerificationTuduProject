@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1228</width>
-    <height>665</height>
+    <width>1277</width>
+    <height>759</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,76 +40,140 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="tabWeek">
+    <widget class="QWidget" name="tabWeekTest">
      <attribute name="title">
-      <string>Week</string>
+      <string>Page</string>
      </attribute>
-     <widget class="QWidget" name="horizontalLayoutWidget">
+     <widget class="QTableWidget" name="tableWidget">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>10</y>
+        <x>15</x>
+        <y>11</y>
         <width>931</width>
-        <height>531</height>
+        <height>561</height>
        </rect>
       </property>
-      <layout class="QHBoxLayout" name="weekLayout">
-       <item alignment="Qt::AlignHCenter">
-        <widget class="QTextEdit" name="day_1">
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="locale">
-          <locale language="Filipino" country="Philippines"/>
-         </property>
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item alignment="Qt::AlignHCenter">
-        <widget class="QTextEdit" name="day_2">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QTextEdit" name="day_3">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QTextEdit" name="day_4">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QTextEdit" name="day_5">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QTextEdit" name="day_6">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QTextEdit" name="day_7">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <property name="mouseTracking">
+       <bool>false</bool>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="rowCount">
+       <number>96</number>
+      </property>
+      <property name="columnCount">
+       <number>7</number>
+      </property>
+      <attribute name="horizontalHeaderMinimumSectionSize">
+       <number>52</number>
+      </attribute>
+      <attribute name="verticalHeaderDefaultSectionSize">
+       <number>32</number>
+      </attribute>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
      </widget>
     </widget>
    </widget>
@@ -156,8 +220,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1228</width>
-     <height>22</height>
+     <width>1277</width>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMonths">
