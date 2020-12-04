@@ -82,8 +82,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
 {
+    std::cout << "R: " << row << " C: " << column << std::endl;
 
-    AddTaskForm mDialog;
+    AddTaskForm mDialog(this, row, column);
     mDialog.setModal(true);
     mDialog.exec();
 
