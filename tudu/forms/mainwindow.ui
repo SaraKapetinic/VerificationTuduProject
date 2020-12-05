@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>856</width>
-    <height>521</height>
+    <width>942</width>
+    <height>602</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,8 +25,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>836</width>
-         <height>438</height>
+         <width>922</width>
+         <height>521</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout">
@@ -183,12 +183,7 @@
               </column>
               <column>
                <property name="text">
-                <string>New Column</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Thuesday</string>
+                <string>Tuesday</string>
                </property>
               </column>
               <column>
@@ -208,14 +203,17 @@
               </column>
               <column>
                <property name="text">
+                <string>Saturday</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
                 <string>Sunday</string>
                </property>
               </column>
              </widget>
             </item>
            </layout>
-           <zorder>tableWidget</zorder>
-           <zorder>horizontalLayoutWidget_2</zorder>
           </widget>
          </widget>
         </item>
@@ -262,8 +260,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>147</width>
-                <height>364</height>
+                <width>158</width>
+                <height>448</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_2">
@@ -278,9 +276,6 @@
          </widget>
         </item>
        </layout>
-       <zorder>tableWidget</zorder>
-       <zorder>tabWidget</zorder>
-       <zorder>frame</zorder>
       </widget>
      </widget>
     </item>
@@ -291,8 +286,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>856</width>
-     <height>23</height>
+     <width>942</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMonths">
