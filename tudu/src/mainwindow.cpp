@@ -7,6 +7,7 @@
 #include <regex>
 #include <QRegularExpression>
 #include "headers/addtaskform.h"
+#include "headers/tudulist.h"
 
 #define NUM_OF_WEEKDAYS 7
 #define HOURS_IN_DAY 24
@@ -60,23 +61,29 @@ MainWindow::MainWindow(QWidget *parent) :
     // Make table fill entire widget
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
+
+
+    auto tuduList = new TuduList(this);
+    tuduList->addTask("'neki task 1'");
+    tuduList->addTask("'neki task 2'");
+    tuduList->addTask("'neki task 3'");
+
+    tuduList->setDragEnabled(true);
+    tuduList->setAcceptDrops(true);
+    tuduList->setDropIndicatorShown(true);
+    tuduList->setDefaultDropAction(Qt::MoveAction);
+
+    ui->verticalLayoutTUDU->addWidget(tuduList);
+
 }
 
 void MainWindow::on_addTaskButtonClicked()
 {
-    printf("Adding a new task to TUDU\n");
-    QTextEdit *frame = new QTextEdit();
-    frame->setPlaceholderText("Add task description");
-    frame->placeholderText();
-    frame->setMinimumHeight(20);
-    frame->setMaximumHeight(100);
+    qDebug("Adding a new task to TUDU");
 
-    ui->verticalLayoutTUDU->addWidget(frame,Qt::AlignTop);
-    // do other init stuff
-
-//    AddTaskForm mDialog;
-//    mDialog.setModal(true);
-//    mDialog.exec();
+    // TODO - implement this
+    auto tududu = ui->verticalLayoutTUDU->findChild<TuduList *>("TuduList");
+//    tududu->addTask("'neki novi task'");
 }
 
 MainWindow::~MainWindow()

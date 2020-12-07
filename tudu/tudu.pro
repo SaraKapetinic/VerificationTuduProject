@@ -24,14 +24,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        src/main.cpp \
-        src/mainwindow.cpp \
-        src/addtaskform.cpp
+    src/main.cpp \
+    src/mainwindow.cpp \
+    src/addtaskform.cpp \
+    src/tudulist.cpp \
+    src/task.cpp
 
 HEADERS += \
-        headers/mainwindow.h \
-        headers/addtaskform.h
+    headers/mainwindow.h \
+    headers/addtaskform.h \
+    headers/tudulist.h \
+    headers/task.h
 
 FORMS += \
-        forms/mainwindow.ui \
-        forms/addtaskform.ui
+    forms/mainwindow.ui \
+    forms/addtaskform.ui
