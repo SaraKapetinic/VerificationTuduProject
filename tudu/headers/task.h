@@ -9,7 +9,32 @@
 class Task : public QStandardItem
 {
 public:
-    Task(const QString &text);
+    Task();
+
+    Task(QString Tname,QString Tdescription,QDateTime TstartTime,QDateTime TendTime,QTime Tduration,qint32 Tpriority,bool TallDayLong);
+
+    Task(Task &obj);
+
+    ~Task();
+
+    QString getName() const;
+    void setName(const QString &value);
+
+    QString getDescription() const;
+    void setDescription(const QString &value);
+
+    QDateTime getStartTime() const;
+    void setStartTime(const QDateTime &value);
+
+    QDateTime getEndTime() const;
+    void setEndTime(const QDateTime &value);
+
+    QTime getDuration() const;
+    void setDuration(const QTime &value);
+
+    qint32 getPriority() const;
+    void setPriority(const qint32 &value);
+
 protected:
     QString name;
     QString description;

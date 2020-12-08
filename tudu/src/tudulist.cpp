@@ -12,7 +12,7 @@ TuduList::TuduList(QWidget *parent) :
 
 void TuduList::addTask(const QString &text)
 {
-    auto *item = new Task(text);
+    auto *item = new Task();
 
     item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
     item->setDragEnabled(true);
