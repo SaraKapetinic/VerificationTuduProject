@@ -1,6 +1,14 @@
 #ifndef TASK_H
 #define TASK_H
 
+#define DESCRIPTION_DEFAULT ("")
+#define STARTTIME_DEFAULT (QDateTime::currentDateTime())
+#define ENDTIME_DEFAULT (QDateTime::currentDateTime())
+#define DURATION_DEFAULT (QTime::currentTime())
+#define PRIORITY_DEFAULT (1)
+#define ALLDAYLONG_DEFAULT (false)
+
+
 #include <QStandardItem>
 #include <QDateTime>
 #include <QTime>
@@ -9,9 +17,8 @@
 class Task : public QStandardItem
 {
 public:
-    Task();
 
-    Task(QString Tname,QString Tdescription,QDateTime TstartTime,QDateTime TendTime,QTime Tduration,qint32 Tpriority,bool TallDayLong);
+    Task(QString Tname, QString Tdescription = DESCRIPTION_DEFAULT , QDateTime TstartTime = STARTTIME_DEFAULT, QDateTime TendTime = ENDTIME_DEFAULT, QTime Tduration = DURATION_DEFAULT, qint32 Tpriority = PRIORITY_DEFAULT, bool TallDayLong = ALLDAYLONG_DEFAULT);
 
     Task(Task &obj);
 

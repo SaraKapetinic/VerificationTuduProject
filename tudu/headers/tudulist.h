@@ -2,6 +2,7 @@
 #define TUDULIST_H
 
 #include <QListView>
+#include <headers/task.h>
 
 class TuduList : public QListView
 {

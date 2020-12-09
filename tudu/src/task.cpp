@@ -1,11 +1,7 @@
 #include "headers/task.h"
 
-Task::Task()
-{
-    // TODO - add getters and setters
-}
 
-Task::Task(QString Tname, QString Tdescription, QDateTime TstartTime, QDateTime TendTime, QTime Tduration, qint32 Tpriority, bool TallDayLong)
+Task::Task(QString Tname,QString Tdescription,QDateTime TstartTime,QDateTime TendTime,QTime Tduration,qint32 Tpriority,bool TallDayLong)
 {
     this->name = Tname;
     this->description = Tdescription;
