@@ -11,7 +11,7 @@
 #define HOURS_IN_DAY 24
 #define MINUTES_IN_HOUR 60
 #define MINUTE_INCREMENTS 15
-#define MINUTE 1
+#define SECONDS_IN_MINUTE 60
 
 class Init
 {

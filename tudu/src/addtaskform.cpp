@@ -23,7 +23,7 @@ AddTaskForm::AddTaskForm(QWidget *parent, QTime time, QDate date, int row, int c
     ui->dateEdit_2->setDate(m_date);
 
     // By deafult set end time +15min from start time
-    ui->timeEdit_2->setTime(m_time.addSecs(5*MINUTE));
+    ui->timeEdit_2->setTime(m_time.addSecs(15*SECONDS_IN_MINUTE));
 }
 
 AddTaskForm::~AddTaskForm()
