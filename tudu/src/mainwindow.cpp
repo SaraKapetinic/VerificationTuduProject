@@ -1,7 +1,7 @@
 #include "headers/mainwindow.h"
 #include "ui_mainwindow.h"
 #include "headers/addtaskform.h"
-#include "src/init.h"
+#include "headers/init.h"
 #include <QTextEdit>
 
 QList<QDate> currentWeek;
@@ -26,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
     for(int i=0;i<NUM_OF_WEEKDAYS;i++){
         currentWeek.append(init->getCurrentWeek()[i]);
     }
+
+
 }
 
 void MainWindow::on_addTaskButtonClicked()

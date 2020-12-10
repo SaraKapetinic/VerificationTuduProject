@@ -1,4 +1,4 @@
-#include "init.h"
+#include "headers/init.h"
 
 Init::Init(){}
 
@@ -44,6 +44,10 @@ void Init::setHeaders(Ui::MainWindow *ui){
         }
     }
     ui->tableWidget->setVerticalHeaderLabels(m_verticalHeaders);
+}
+
+void Init::setDesign(Ui::MainWindow *ui){
+    ui->tableWidget->setStyleSheet("background-color: red;");
 }
 
 QList<QDate> Init::getCurrentWeek(){

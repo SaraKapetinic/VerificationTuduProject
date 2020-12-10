@@ -32,7 +32,7 @@ SOURCES += \
 HEADERS += \
         headers/mainwindow.h \
         headers/addtaskform.h \
-        src/init.h
+        headers/init.h
 
 FORMS += \
         forms/mainwindow.ui \

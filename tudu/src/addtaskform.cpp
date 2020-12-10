@@ -1,7 +1,7 @@
 #include "headers/addtaskform.h"
 #include "ui_addtaskform.h"
 #include "ui_mainwindow.h"
-#include "task.h"
+#include "headers/init.h"
 
 AddTaskForm::AddTaskForm(QWidget *parent, QTime time, QDate date, int row, int column) :
     QDialog(parent),
@@ -23,7 +23,7 @@ AddTaskForm::AddTaskForm(QWidget *parent, QTime time, QDate date, int row, int c
     ui->dateEdit_2->setDate(m_date);
 
     // By deafult set end time +15min from start time
-    ui->timeEdit_2->setTime(m_time.addSecs(900));
+    ui->timeEdit_2->setTime(m_time.addSecs(5*MINUTE));
 }
 
 AddTaskForm::~AddTaskForm()

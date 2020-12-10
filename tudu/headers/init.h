@@ -11,6 +11,7 @@
 #define HOURS_IN_DAY 24
 #define MINUTES_IN_HOUR 60
 #define MINUTE_INCREMENTS 15
+#define MINUTE 1
 
 class Init
 {
@@ -19,6 +20,7 @@ public:
 
     void setDays(Ui::MainWindow* ui);
     void setHeaders(Ui::MainWindow* ui);
+    void setDesign(Ui::MainWindow* ui);
 
     QList<QDate> getCurrentWeek();
 
