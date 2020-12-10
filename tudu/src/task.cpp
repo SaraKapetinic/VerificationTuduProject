@@ -1,23 +1,35 @@
 #include "headers/task.h"
 
 
-Task::Task(QString Tname,QString Tdescription,QDateTime TstartTime,QDateTime TendTime,QTime Tduration,qint32 Tpriority,bool TallDayLong)
+Task::Task(
+        QString Tname,
+        QString Tdescription,
+        QDateTime TstartTime,
+        QDateTime TendTime,
+        QTime Tduration,
+        qint32 Tpriority,
+        bool TallDayLong) :
+    QStandardItem(Tname)
 {
     this->name = Tname;
     this->description = Tdescription;
     this->startTime = TstartTime;
     this->endTime = TendTime;
+    this->creationTime = QDateTime::currentDateTime();
     this->duration = Tduration;
     this->priority = Tpriority;
     this->allDayLong = TallDayLong;
 }
 
-Task::Task(Task &obj) : QStandardItem()
+Task::Task(Task &obj) :
+    QStandardItem(obj.name)
 {
     this->name = obj.name;
     this->description = obj.description;
     this->startTime = obj.startTime;
     this->endTime = obj.endTime;
+    // TODO should we copy the creation time?
+    this->creationTime = obj.creationTime;
     this->duration = obj.duration;
     this->priority = obj.priority;
     this->allDayLong = obj.allDayLong;
@@ -66,6 +78,11 @@ QDateTime Task::getEndTime() const
 void Task::setEndTime(const QDateTime &value)
 {
     endTime = value;
+}
+
+QDateTime Task::getCreationTime() const
+{
+    return creationTime;
 }
 
 QTime Task::getDuration() const

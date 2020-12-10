@@ -47,6 +47,7 @@ protected:
     QString description;
     QDateTime startTime;
     QDateTime endTime;
+    QDateTime creationTime;
     QTime duration;
     qint32 priority;
     bool allDayLong;
