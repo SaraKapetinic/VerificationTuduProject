@@ -17,6 +17,7 @@ public:
 
 public slots:
   void on_addTaskButtonClicked();
+  void recieveFromTask(QString taskTitle, int row, int column);
 
 private slots:
   void on_tableWidget_cellDoubleClicked(int row, int column);

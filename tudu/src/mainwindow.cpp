@@ -1,18 +1,10 @@
 #include "headers/mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QDate>
-#include <QColorDialog>
-#include <iostream>
-#include <QTextEdit>
-#include <regex>
-#include <QRegularExpression>
 #include "headers/addtaskform.h"
+#include "headers/init.h"
+#include <QTextEdit>
 
-#define NUM_OF_WEEKDAYS 7
-#define HOURS_IN_DAY 24
-#define MINUTES_IN_HOUR 60
-#define MINUTE_INCREMENTS 15
-
+QList<QDate> currentWeek;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -20,45 +12,21 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QDate currentDate = ui->calendarMonths->selectedDate();
+    // Initialization class
+    Init *init = new Init();
 
-    // Ordinal number of current day (Monday = 1; ... ; Sunday = 7)
-    int currentDayOfWeek = currentDate.dayOfWeek();
-
-    // Number of days till the end of the week
-    int numOfDays = NUM_OF_WEEKDAYS - currentDayOfWeek;
-
-    QVector<int> daysAdded(NUM_OF_WEEKDAYS);
-    for (int i=NUM_OF_WEEKDAYS-1; i>=0; i--) {
-        daysAdded[i] = numOfDays;
-        numOfDays--;
-    }
-
-    QStringList days = {"Monday\n", "Tuesday\n", "Wednesday\n", "Thursday\n",
-                        "Friday\n", "Saturday\n", "Sunday\n"};
-
-    // Make header text Day\n Date
-    for(int i=0; i<days.size(); i++){
-        days[i].append(currentDate.addDays(daysAdded[i]).toString("dd.MM.yyyy."));
-    }
-
-    // Set column headers
-    ui->tableWidget->setHorizontalHeaderLabels(days);
-
-    // Set row headers
-    QStringList verticalHeaders;
-    QString time;
-    for (int i=0; i<HOURS_IN_DAY; i++) {
-        for (int j=0; j<MINUTES_IN_HOUR; j+=MINUTE_INCREMENTS) {
-            time = "";
-            time.sprintf("%02d.%02d", i, j);
-            verticalHeaders << time;
-        }
-    }
-    ui->tableWidget->setVerticalHeaderLabels(verticalHeaders);
+    // Methods to set up mainwindow
+    init->setDays(ui);
+    init->setHeaders(ui);
 
     // Make table fill entire widget
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    // Append to list so we can use it in cellDoubleClicked
+    for(int i=0;i<NUM_OF_WEEKDAYS;i++){
+        currentWeek.append(init->getCurrentWeek()[i]);
+    }
+
 
 }
 
@@ -74,9 +42,6 @@ void MainWindow::on_addTaskButtonClicked()
     ui->verticalLayoutTUDU->addWidget(frame,Qt::AlignTop);
     // do other init stuff
 
-//    AddTaskForm mDialog;
-//    mDialog.setModal(true);
-//    mDialog.exec();
 }
 
 MainWindow::~MainWindow()
@@ -84,49 +49,34 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::recieveFromTask(QString text, int row, int column){
+
+    // Show taskTitle in daily view
+    auto model = ui->tableWidget->model();
+    model->setData(model->index(row, column), text);
+
+    // Make current cell uneditable
+    QTableWidgetItem* item = ui->tableWidget->item(row, column);
+    item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+
+    // Set color of scheduled task
+    QColor taskColor = QColor(0, 204, 204);
+    item->setBackground(taskColor);
+
+}
 
 void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
 {
-    AddTaskForm mDialog(this, row, column);
-    mDialog.setModal(true);
-    mDialog.exec();
 
-    /*
-    // Window that pops up on double click
-    QWidget *taskWindow = new QWidget();
-
-    // Set window title
-    taskWindow->setWindowTitle("Add New Task");
-
-    // Set collected time and date
-    QLabel *lDate = new QLabel();
-    lDate->setText("Date:\n" + date);
-
-    QLabel *lTime = new QLabel();
-    lTime->setText("Time:\n" + time);
+    QTime time = QTime::fromString(ui->tableWidget->verticalHeaderItem(row)->text(), "hh.mm");
+    QDate date = currentWeek[column];
 
 
-    // Field for describing a task
-    QTextEdit* taskTudu = new QTextEdit();
-    taskTudu->setPlaceholderText("Task description");
-    taskTudu->setMinimumHeight(50);
-    taskTudu->setMaximumHeight(50);
+    AddTaskForm *mDialog = new AddTaskForm(this, time, date, row, column);
 
+    // Send data from form to main window
+    connect(mDialog, SIGNAL(sendToCalendar(QString, int, int)), this, SLOT(recieveFromTask(QString, int, int)));
+    mDialog->setModal(true);
+    mDialog->exec();
 
-    // Button for adding a task
-    QPushButton* addTaskButton = new QPushButton();
-    addTaskButton->setText("Add Task");
-
-    // Layout configuration
-    QBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget(lDate);
-    layout->addWidget(lTime);
-    layout->addWidget(taskTudu);
-    layout->addWidget(addTaskButton);
-
-    layout->setContentsMargins(150, 200, 150, 200);
-
-    taskWindow->setLayout(layout);
-
-    taskWindow->show();*/
 }
