@@ -13,6 +13,7 @@ void Init::setDays(Ui::MainWindow* ui){
     QColor headerColor = (255);
     ui->tableWidget->horizontalHeaderItem(currentDayOfWeek-1)->setBackground(headerColor);
 
+
     int numOfDays = NUM_OF_WEEKDAYS - currentDayOfWeek;
 
     QVector<int> daysAdded(NUM_OF_WEEKDAYS);
@@ -28,9 +29,15 @@ void Init::setDays(Ui::MainWindow* ui){
         m_horizontalHeaders.append(ui->tableWidget->horizontalHeaderItem(i)->text().append(currentDate.addDays(daysAdded[i]).toString("\ndd.MM.yyyy.")));
     }
 
+
+
 }
 
 void Init::setHeaders(Ui::MainWindow *ui){
+
+    // Get current hour
+    int currentHour = QTime::currentTime().hour();
+
     // Set column headers
     ui->tableWidget->setHorizontalHeaderLabels(m_horizontalHeaders);
 
@@ -44,6 +51,9 @@ void Init::setHeaders(Ui::MainWindow *ui){
         }
     }
     ui->tableWidget->setVerticalHeaderLabels(m_verticalHeaders);
+    ui->tableWidget->verticalHeaderItem(4*currentHour)->setBackground(QBrush(QColor("red")));
+
+
 }
 
 void Init::setDesign(Ui::MainWindow *ui){
