@@ -107,7 +107,7 @@
         </widget>
        </item>
        <item row="7" column="0">
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="pbSaveTask">
          <property name="font">
           <font>
            <pointsize>12</pointsize>
@@ -119,7 +119,7 @@
         </widget>
        </item>
        <item row="0" column="0">
-        <widget class="QLineEdit" name="lineEdit">
+        <widget class="QLineEdit" name="taskTitle">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -145,7 +145,7 @@
         </widget>
        </item>
        <item row="6" column="0">
-        <widget class="QPlainTextEdit" name="plainTextEdit">
+        <widget class="QPlainTextEdit" name="taskDesc">
          <property name="placeholderText">
           <string>Add description</string>
          </property>

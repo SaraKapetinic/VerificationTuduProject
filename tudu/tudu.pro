@@ -28,13 +28,15 @@ SOURCES += \
     src/mainwindow.cpp \
     src/addtaskform.cpp \
     src/tudulist.cpp \
-    src/task.cpp
+    src/task.cpp \
+    src/init.cpp 
 
 HEADERS += \
     headers/mainwindow.h \
     headers/addtaskform.h \
     headers/tudulist.h \
-    headers/task.h
+    headers/task.h \
+    headers/init.h
 
 FORMS += \
     forms/mainwindow.ui \
