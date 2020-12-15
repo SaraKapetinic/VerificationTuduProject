@@ -1,6 +1,7 @@
 #include "headers/mainwindow.h"
 #include "ui_mainwindow.h"
 #include "headers/addtaskform.h"
+#include "headers/tudulist.h"
 #include "headers/init.h"
 #include <QTextEdit>
 
@@ -28,20 +29,29 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
 
+
+
+    auto tuduList = new TuduList(this);
+    tuduList->addTask("'neki task 1'");
+    tuduList->addTask("'neki task 2'");
+    tuduList->addTask("'neki task 3'");
+
+    tuduList->setDragEnabled(true);
+    tuduList->setAcceptDrops(true);
+    tuduList->setDropIndicatorShown(true);
+    tuduList->setDefaultDropAction(Qt::MoveAction);
+
+    ui->verticalLayoutTUDU->addWidget(tuduList);
+
 }
 
 void MainWindow::on_addTaskButtonClicked()
 {
-    printf("Adding a new task to TUDU\n");
-    QTextEdit *frame = new QTextEdit();
-    frame->setPlaceholderText("Add task description");
-    frame->placeholderText();
-    frame->setMinimumHeight(20);
-    frame->setMaximumHeight(100);
+    qDebug("Adding a new task to TUDU");
 
-    ui->verticalLayoutTUDU->addWidget(frame,Qt::AlignTop);
-    // do other init stuff
-
+    // TODO - implement this
+    auto tududu = ui->verticalLayoutTUDU->findChild<TuduList *>("TuduList");
+//    tududu->addTask("'neki novi task'");
 }
 
 MainWindow::~MainWindow()
