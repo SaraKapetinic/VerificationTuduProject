@@ -104,3 +104,7 @@ void Task::setPriority(const qint32 &value)
 {
     priority = value;
 }
+
+
+
+

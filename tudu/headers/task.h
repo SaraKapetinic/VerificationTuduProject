@@ -36,6 +36,8 @@ public:
     QDateTime getEndTime() const;
     void setEndTime(const QDateTime &value);
 
+    QDateTime getCreationTime() const;
+
     QTime getDuration() const;
     void setDuration(const QTime &value);
 
