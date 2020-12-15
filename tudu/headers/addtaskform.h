@@ -22,7 +22,7 @@ private slots:
     void on_pbSaveTask_clicked();
 
 signals:
-    void sendToCalendar(QString taskTitle, int row, int column);
+    void sendToCalendar(QString taskTitle, int row, int column, int span);
 
 private:
     Ui::AddTaskForm *ui;
