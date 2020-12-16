@@ -50,9 +50,7 @@ void Init::setHeaders(Ui::MainWindow* ui){
     for (int i=0; i<HOURS_IN_DAY; i++) {
         for (int j=0; j<MINUTES_IN_HOUR; j+=MINUTE_INCREMENTS) {
             time = "";
-            if(j == 0) {
-                time.sprintf("%02d:%02d", i, j);
-            }
+            time.sprintf("%02d:%02d", i, j);
             m_verticalHeaders << time;
         }
     }
@@ -79,14 +77,14 @@ int Init::getCurrentTimeRow(Ui::MainWindow* ui) {
     int currentMinutes = QTime::currentTime().minute();
 
     int minuteQuadrants;
-    if (currentMinutes < 60) {
-        minuteQuadrants = 3;
-    } else if (currentMinutes <= 45) {
-        minuteQuadrants = 2;
+    if (currentMinutes <= 15) {
+        minuteQuadrants = 0;
     } else if (currentMinutes <= 30) {
         minuteQuadrants = 1;
+    } else if (currentMinutes <= 45) {
+        minuteQuadrants = 2;
     } else {
-        minuteQuadrants = 0;
+        minuteQuadrants = 3;
     }
 
     return 4*currentHour + minuteQuadrants;

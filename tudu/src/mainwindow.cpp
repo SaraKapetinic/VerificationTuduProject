@@ -69,7 +69,7 @@ void MainWindow::recieveFromTask(QString text, int row, int column, int span){
 void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
 {
 
-    QTime time = QTime::fromString(ui->tableWidget->verticalHeaderItem(row)->text(), "hh.mm");
+    QTime time = QTime::fromString(ui->tableWidget->verticalHeaderItem(row)->text(), "hh:mm");
     QDate date = currentWeek[column];
 
     AddTaskForm *mDialog = new AddTaskForm(this, time, date, row, column);
