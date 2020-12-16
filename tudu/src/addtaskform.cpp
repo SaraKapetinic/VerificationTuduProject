@@ -36,7 +36,11 @@ void AddTaskForm::on_pbSaveTask_clicked()
     QString taskTitle = ui->taskTitle->text();
     QString taskDesc = ui->taskDesc->toPlainText();
 
-    emit sendToCalendar(taskTitle, m_row, m_column);
+    int start = ui->timeEdit->time().hour() * 60 + ui->timeEdit->time().minute();
+    int end = ui->timeEdit_2->time().hour() * 60 + ui->timeEdit_2->time().minute();
+    int span = (end - start)/15;
+
+    emit sendToCalendar(taskTitle, m_row, m_column, span);
 
     close();
 }
