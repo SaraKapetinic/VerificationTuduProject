@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "headers/addtaskform.h"
 #include "headers/tudulist.h"
+#include "headers/tudutask.h"
 #include "headers/init.h"
 #include <QTextEdit>
 
@@ -50,8 +51,11 @@ void MainWindow::on_addTaskButtonClicked()
     qDebug("Adding a new task to TUDU");
 
     // TODO - implement this
-    auto tududu = ui->verticalLayoutTUDU->findChild<TuduList *>("TuduList");
+   //auto tududu = ui->verticalLayoutTUDU->findChild<TuduList *>("TuduList");
 //    tududu->addTask("'neki novi task'");
+    TuduTask *tDialog = new TuduTask(this);
+    tDialog->setModal(true);
+    tDialog->exec();
 }
 
 MainWindow::~MainWindow()
