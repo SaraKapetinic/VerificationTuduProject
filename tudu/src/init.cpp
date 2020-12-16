@@ -54,7 +54,7 @@ void Init::setHeaders(Ui::MainWindow* ui){
             m_verticalHeaders << time;
         }
     }
-    std::cout << currentMinutes%15 << std::endl;
+
     ui->tableWidget->setVerticalHeaderLabels(m_verticalHeaders);
     ui->tableWidget->verticalHeaderItem(getCurrentTimeRow(ui))->setBackground(QBrush(QColor("red")));
     ui->tableWidget->setCurrentCell(getCurrentTimeRow(ui), currentDayOfWeek-1);
