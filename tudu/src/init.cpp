@@ -13,7 +13,6 @@ void Init::setDays(Ui::MainWindow* ui){
     QColor headerColor = (255);
     ui->tableWidget->horizontalHeaderItem(currentDayOfWeek-1)->setBackground(headerColor);
 
-
     int numOfDays = NUM_OF_WEEKDAYS - currentDayOfWeek;
 
     QVector<int> daysAdded(NUM_OF_WEEKDAYS);
@@ -29,18 +28,12 @@ void Init::setDays(Ui::MainWindow* ui){
         m_horizontalHeaders.append(ui->tableWidget->horizontalHeaderItem(i)->text().append(currentDate.addDays(daysAdded[i]).toString("\ndd.MM.yyyy.")));
     }
 
-
-
 }
 
 void Init::setHeaders(Ui::MainWindow* ui){
 
     // Ordinal number of current day (Monday = 1; ... ; Sunday = 7)
     int currentDayOfWeek = getCurrentDayOfWeek(ui);
-
-    // Get current hour
-    int currentHour = QTime::currentTime().hour();
-    int currentMinutes = QTime::currentTime().minute();
 
     // Set column headers
     ui->tableWidget->setHorizontalHeaderLabels(m_horizontalHeaders);
@@ -73,19 +66,11 @@ int Init::getCurrentTimeRow(Ui::MainWindow* ui) {
 
     // Get current hour
     int currentHour = QTime::currentTime().hour();
-    // Get cuurent minutes -> in range [0,59]
+    // Get current minutes -> in range [0,59]
     int currentMinutes = QTime::currentTime().minute();
 
-    int minuteQuadrants;
-    if (currentMinutes <= 15) {
-        minuteQuadrants = 0;
-    } else if (currentMinutes <= 30) {
-        minuteQuadrants = 1;
-    } else if (currentMinutes <= 45) {
-        minuteQuadrants = 2;
-    } else {
-        minuteQuadrants = 3;
-    }
+    int minuteQuadrants = currentMinutes / 15;
+
 
     return 4*currentHour + minuteQuadrants;
 }

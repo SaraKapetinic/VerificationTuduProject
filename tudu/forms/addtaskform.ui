@@ -67,7 +67,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QDateEdit" name="dateEdit">
+           <widget class="QDateEdit" name="startDate">
             <property name="displayFormat">
              <string>dd.MM.yyyy.</string>
             </property>
@@ -77,7 +77,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QTimeEdit" name="timeEdit">
+           <widget class="QTimeEdit" name="startTime">
             <property name="timeSpec">
              <enum>Qt::LocalTime</enum>
             </property>
@@ -91,7 +91,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QDateEdit" name="dateEdit_2">
+           <widget class="QDateEdit" name="endDate">
             <property name="displayFormat">
              <string>dd.MM.yyyy.</string>
             </property>
@@ -101,7 +101,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QTimeEdit" name="timeEdit_2"/>
+           <widget class="QTimeEdit" name="endTime"/>
           </item>
          </layout>
         </widget>

@@ -3,6 +3,7 @@
 #include "ui_mainwindow.h"
 #include "headers/init.h"
 
+
 AddTaskForm::AddTaskForm(QWidget *parent, QTime time, QDate date, int row, int column) :
     QDialog(parent),
     ui(new Ui::AddTaskForm)
@@ -15,15 +16,17 @@ AddTaskForm::AddTaskForm(QWidget *parent, QTime time, QDate date, int row, int c
     ui->setupUi(this);
 
     // Fill out form with time and date based on clicked cell
-    ui->dateEdit->setDate(m_date);
-    ui->timeEdit->setTime(m_time);
+    ui->startDate->setDate(m_date);
+    ui->startTime->setTime(m_time);
+
+
 
 
     // Suppose it's a one-day task
-    ui->dateEdit_2->setDate(m_date);
+    ui->endDate->setDate(m_date);
 
     // By deafult set end time +15min from start time
-    ui->timeEdit_2->setTime(m_time.addSecs(15*SECONDS_IN_MINUTE));
+    ui->endTime->setTime(m_time.addSecs(15*SECONDS_IN_MINUTE));
 }
 
 AddTaskForm::~AddTaskForm()
@@ -36,8 +39,8 @@ void AddTaskForm::on_pbSaveTask_clicked()
     QString taskTitle = ui->taskTitle->text();
     QString taskDesc = ui->taskDesc->toPlainText();
 
-    int start = ui->timeEdit->time().hour() * 60 + ui->timeEdit->time().minute();
-    int end = ui->timeEdit_2->time().hour() * 60 + ui->timeEdit_2->time().minute();
+    int start = ui->startTime->time().hour() * 60 + ui->startTime->time().minute();
+    int end = ui->endTime->time().hour() * 60 + ui->endTime->time().minute();
     int span = (end - start)/15;
 
     emit sendToCalendar(taskTitle, m_row, m_column, span);
