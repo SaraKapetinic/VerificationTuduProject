@@ -24,6 +24,9 @@ public:
 
     QList<QDate> getCurrentWeek();
 
+    int getCurrentTimeRow(Ui::MainWindow* ui);
+    int getCurrentDayOfWeek(Ui::MainWindow* ui);
+
 private:
     QWidget m_ui;
     QStringList m_horizontalHeaders;

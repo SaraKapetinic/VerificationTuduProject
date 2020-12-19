@@ -26,7 +26,7 @@
          <x>0</x>
          <y>0</y>
          <width>922</width>
-         <height>521</height>
+         <height>519</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout">
@@ -57,12 +57,15 @@
           </widget>
           <widget class="QWidget" name="tabWeekTest">
            <attribute name="title">
-            <string>Page</string>
+            <string>Week</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_5">
             <item row="0" column="0">
              <widget class="QTableWidget" name="tableWidget">
               <property name="mouseTracking">
+               <bool>true</bool>
+              </property>
+              <property name="acceptDrops">
                <bool>true</bool>
               </property>
               <property name="acceptDrops">
@@ -285,7 +288,7 @@
                 <x>0</x>
                 <y>0</y>
                 <width>158</width>
-                <height>448</height>
+                <height>445</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_2">
@@ -311,7 +314,7 @@
      <x>0</x>
      <y>0</y>
      <width>942</width>
-     <height>22</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMonths">

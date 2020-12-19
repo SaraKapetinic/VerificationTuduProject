@@ -63,7 +63,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::recieveFromTask(QString text, int row, int column){
+void MainWindow::recieveFromTask(QString text, int row, int column, int span){
 
     // Show taskTitle in daily view
     auto model = ui->tableWidget->model();
@@ -76,20 +76,20 @@ void MainWindow::recieveFromTask(QString text, int row, int column){
     // Set color of scheduled task
     QColor taskColor = QColor(0, 204, 204);
     item->setBackground(taskColor);
+    ui->tableWidget->setSpan(row, column, span, 1);
 
 }
 
 void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
 {
 
-    QTime time = QTime::fromString(ui->tableWidget->verticalHeaderItem(row)->text(), "hh.mm");
+    QTime time = QTime::fromString(ui->tableWidget->verticalHeaderItem(row)->text(), "hh:mm");
     QDate date = currentWeek[column];
-
 
     AddTaskForm *mDialog = new AddTaskForm(this, time, date, row, column);
 
     // Send data from form to main window
-    connect(mDialog, SIGNAL(sendToCalendar(QString, int, int)), this, SLOT(recieveFromTask(QString, int, int)));
+    connect(mDialog, SIGNAL(sendToCalendar(QString, int, int, int)), this, SLOT(recieveFromTask(QString, int, int, int)));
     mDialog->setModal(true);
     mDialog->exec();
 
