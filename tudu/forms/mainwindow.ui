@@ -63,7 +63,10 @@
             <item row="0" column="0">
              <widget class="QTableWidget" name="tableWidget">
               <property name="mouseTracking">
-               <bool>false</bool>
+               <bool>true</bool>
+              </property>
+              <property name="acceptDrops">
+               <bool>true</bool>
               </property>
               <property name="acceptDrops">
                <bool>true</bool>
@@ -71,11 +74,20 @@
               <property name="autoFillBackground">
                <bool>true</bool>
               </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QAbstractScrollArea::AdjustIgnored</enum>
+              </property>
               <property name="dragEnabled">
                <bool>true</bool>
               </property>
               <property name="dragDropMode">
                <enum>QAbstractItemView::DragDrop</enum>
+              </property>
+              <property name="defaultDropAction">
+               <enum>Qt::MoveAction</enum>
+              </property>
+              <property name="gridStyle">
+               <enum>Qt::SolidLine</enum>
               </property>
               <property name="rowCount">
                <number>96</number>
@@ -83,8 +95,14 @@
               <property name="columnCount">
                <number>7</number>
               </property>
+              <attribute name="horizontalHeaderCascadingSectionResizes">
+               <bool>false</bool>
+              </attribute>
               <attribute name="horizontalHeaderMinimumSectionSize">
                <number>52</number>
+              </attribute>
+              <attribute name="horizontalHeaderStretchLastSection">
+               <bool>false</bool>
               </attribute>
               <attribute name="verticalHeaderDefaultSectionSize">
                <number>32</number>
