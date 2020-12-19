@@ -1,22 +1,22 @@
-#ifndef TUDUTASK_H
-#define TUDUTASK_H
+#ifndef ADDTASKFORMTUDU_H
+#define ADDTASKFORMTUDU_H
 
 #include <QDialog>
 
 namespace Ui {
-class TuduTask;
+class AddTaskFormTudu;
 }
 
-class addTaskFormTudu : public QDialog
+class AddTaskFormTudu : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit addTaskFormTudu(QWidget *parent = nullptr);
-    ~addTaskFormTudu();
+    explicit AddTaskFormTudu(QWidget *parent = nullptr);
+    ~AddTaskFormTudu();
 
 private:
-    Ui::TuduTask *ui;
+    Ui::AddTaskFormTudu *ui;
 };
 
-#endif // TUDUTASK_H
+#endif // ADDTASKFORMTUDU_H

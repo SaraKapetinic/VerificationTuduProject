@@ -1,5 +1,5 @@
-#ifndef ADDTASKFORM_H
-#define ADDTASKFORM_H
+#ifndef ADDTASKFORMWEEKLY_H
+#define ADDTASKFORMWEEKLY_H
 
 #include <QDialog>
 #include <iostream>
@@ -7,7 +7,7 @@
 #include "ui_mainwindow.h"
 
 namespace Ui {
-class AddTaskForm;
+class AddTaskFormWeekly;
 }
 
 class AddTaskFormWeekly : public QDialog
@@ -25,11 +25,11 @@ signals:
     void sendToCalendar(QString taskTitle, int row, int column, int span);
 
 private:
-    Ui::AddTaskForm *ui;
+    Ui::AddTaskFormWeekly *ui;
     QTime m_time;
     QDate m_date;
     int m_row;
     int m_column;
 };
 
-#endif // ADDTASKFORM_H
+#endif // ADDTASKFORMWEEKLY_H

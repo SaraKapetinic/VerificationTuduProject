@@ -1,12 +1,12 @@
 #include "headers/addtaskformweekly.h"
-#include "ui_addtaskform.h"
+#include "ui_addtaskformweekly.h"
 #include "ui_mainwindow.h"
 #include "headers/init.h"
 
 
 AddTaskFormWeekly::AddTaskFormWeekly(QWidget *parent, QTime time, QDate date, int row, int column) :
     QDialog(parent),
-    ui(new Ui::AddTaskForm)
+    ui(new Ui::AddTaskFormWeekly)
 {
     m_time = time;
     m_date = date;

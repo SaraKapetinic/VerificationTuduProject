@@ -1,14 +1,14 @@
 #include "headers/addtaskformtudu.h"
-#include "ui_tudutask.h"
+#include "ui_addtaskformtudu.h"
 
-addTaskFormTudu::addTaskFormTudu(QWidget *parent) :
+AddTaskFormTudu::AddTaskFormTudu(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::TuduTask)
+    ui(new Ui::AddTaskFormTudu)
 {
     ui->setupUi(this);
 }
 
-addTaskFormTudu::~addTaskFormTudu()
+AddTaskFormTudu::~AddTaskFormTudu()
 {
     delete ui;
 }

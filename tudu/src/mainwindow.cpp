@@ -53,7 +53,7 @@ void MainWindow::on_addTaskButtonClicked()
     // TODO - implement this
    //auto tududu = ui->verticalLayoutTUDU->findChild<TuduList *>("TuduList");
 //    tududu->addTask("'neki novi task'");
-    addTaskFormTudu *tDialog = new addTaskFormTudu(this);
+    AddTaskFormTudu *tDialog = new AddTaskFormTudu(this);
     tDialog->setModal(true);
     tDialog->exec();
 }
