@@ -7,13 +7,13 @@ namespace Ui {
 class TuduTask;
 }
 
-class TuduTask : public QDialog
+class addTaskFormTudu : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit TuduTask(QWidget *parent = nullptr);
-    ~TuduTask();
+    explicit addTaskFormTudu(QWidget *parent = nullptr);
+    ~addTaskFormTudu();
 
 private:
     Ui::TuduTask *ui;

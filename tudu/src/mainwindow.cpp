@@ -53,7 +53,7 @@ void MainWindow::on_addTaskButtonClicked()
     // TODO - implement this
    //auto tududu = ui->verticalLayoutTUDU->findChild<TuduList *>("TuduList");
 //    tududu->addTask("'neki novi task'");
-    TuduTask *tDialog = new TuduTask(this);
+    addTaskFormTudu *tDialog = new addTaskFormTudu(this);
     tDialog->setModal(true);
     tDialog->exec();
 }
@@ -86,7 +86,7 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
     QTime time = QTime::fromString(ui->tableWidget->verticalHeaderItem(row)->text(), "hh:mm");
     QDate date = currentWeek[column];
 
-    AddTaskForm *mDialog = new AddTaskForm(this, time, date, row, column);
+    AddTaskFormWeekly *mDialog = new AddTaskFormWeekly(this, time, date, row, column);
 
     // Send data from form to main window
     connect(mDialog, SIGNAL(sendToCalendar(QString, int, int, int)), this, SLOT(recieveFromTask(QString, int, int, int)));
