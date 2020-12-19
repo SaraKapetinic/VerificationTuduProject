@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AddTaskForm</class>
- <widget class="QDialog" name="AddTaskForm">
+ <class>AddTaskFormWeekly</class>
+ <widget class="QDialog" name="AddTaskFormWeekly">
   <property name="geometry">
    <rect>
     <x>0</x>

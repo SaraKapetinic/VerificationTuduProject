@@ -1,12 +1,12 @@
-#include "headers/addtaskform.h"
-#include "ui_addtaskform.h"
+#include "headers/addtaskformweekly.h"
+#include "ui_addtaskformweekly.h"
 #include "ui_mainwindow.h"
 #include "headers/init.h"
 
 
-AddTaskForm::AddTaskForm(QWidget *parent, QTime time, QDate date, int row, int column) :
+AddTaskFormWeekly::AddTaskFormWeekly(QWidget *parent, QTime time, QDate date, int row, int column) :
     QDialog(parent),
-    ui(new Ui::AddTaskForm)
+    ui(new Ui::AddTaskFormWeekly)
 {
     m_time = time;
     m_date = date;
@@ -29,12 +29,12 @@ AddTaskForm::AddTaskForm(QWidget *parent, QTime time, QDate date, int row, int c
     ui->endTime->setTime(m_time.addSecs(15*SECONDS_IN_MINUTE));
 }
 
-AddTaskForm::~AddTaskForm()
+AddTaskFormWeekly::~AddTaskFormWeekly()
 {
     delete ui;
 }
 
-void AddTaskForm::on_pbSaveTask_clicked()
+void AddTaskFormWeekly::on_pbSaveTask_clicked()
 {
     QString taskTitle = ui->taskTitle->text();
     QString taskDesc = ui->taskDesc->toPlainText();

@@ -24,23 +24,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-    src/tudutask.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
-    src/addtaskform.cpp \
     src/tudulist.cpp \
     src/task.cpp \
-    src/init.cpp 
+    src/init.cpp \ 
+    src/addtaskformweekly.cpp \
+    src/addtaskformtudu.cpp
 
 HEADERS += \
-    headers/tudutask.h \
     headers/mainwindow.h \
-    headers/addtaskform.h \
     headers/tudulist.h \
     headers/task.h \
-    headers/init.h
+    headers/init.h \
+    headers/addtaskformweekly.h \
+    headers/addtaskformtudu.h
 
 FORMS += \
     forms/mainwindow.ui \
-    forms/addtaskform.ui \
-    forms/tudutask.ui
+    forms/addtaskformweekly.ui \
+    forms/addtaskformtudu.ui
