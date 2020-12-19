@@ -12,3 +12,13 @@ AddTaskFormTudu::~AddTaskFormTudu()
 {
     delete ui;
 }
+
+void AddTaskFormTudu::on_tuduTaskSave_clicked(){
+    auto taskTitle = ui->taskTitle->text();
+    auto taskDesc = ui->taskDesc->toPlainText();
+    auto taskPriority = ui->taskPriority->currentIndex();
+
+    emit sendToTuduList(taskTitle, taskDesc, taskPriority);
+
+    close();
+}

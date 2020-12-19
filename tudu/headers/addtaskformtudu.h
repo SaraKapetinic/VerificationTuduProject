@@ -3,6 +3,10 @@
 
 #include <QDialog>
 
+#define HIGH_PRIORITY (0)
+#define MID_PRIORITY (1)
+#define LOW_PRIORITY (2)
+
 namespace Ui {
 class AddTaskFormTudu;
 }
@@ -14,6 +18,12 @@ class AddTaskFormTudu : public QDialog
 public:
     explicit AddTaskFormTudu(QWidget *parent = nullptr);
     ~AddTaskFormTudu();
+
+private slots:
+    void on_tuduTaskSave_clicked();
+
+signals:
+    void sendToTuduList(QString title, QString desc, int priority);
 
 private:
     Ui::AddTaskFormTudu *ui;

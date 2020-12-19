@@ -19,9 +19,6 @@ AddTaskFormWeekly::AddTaskFormWeekly(QWidget *parent, QTime time, QDate date, in
     ui->startDate->setDate(m_date);
     ui->startTime->setTime(m_time);
 
-
-
-
     // Suppose it's a one-day task
     ui->endDate->setDate(m_date);
 

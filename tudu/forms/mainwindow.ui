@@ -26,7 +26,7 @@
          <x>0</x>
          <y>0</y>
          <width>922</width>
-         <height>519</height>
+         <height>521</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout">
@@ -63,9 +63,6 @@
             <item row="0" column="0">
              <widget class="QTableWidget" name="tableWidget">
               <property name="mouseTracking">
-               <bool>true</bool>
-              </property>
-              <property name="acceptDrops">
                <bool>true</bool>
               </property>
               <property name="acceptDrops">
@@ -288,7 +285,7 @@
                 <x>0</x>
                 <y>0</y>
                 <width>158</width>
-                <height>445</height>
+                <height>448</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_2">
@@ -314,7 +311,7 @@
      <x>0</x>
      <y>0</y>
      <width>942</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMonths">
