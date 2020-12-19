@@ -1,8 +1,8 @@
 #include "headers/mainwindow.h"
 #include "ui_mainwindow.h"
-#include "headers/addtaskform.h"
+#include "headers/addtaskformweekly.h"
 #include "headers/tudulist.h"
-#include "headers/tudutask.h"
+#include "headers/addtaskformtudu.h"
 #include "headers/init.h"
 #include <QTextEdit>
 

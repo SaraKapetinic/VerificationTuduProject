@@ -1,4 +1,4 @@
-#include "headers/addtaskform.h"
+#include "headers/addtaskformweekly.h"
 #include "ui_addtaskform.h"
 #include "ui_mainwindow.h"
 #include "headers/init.h"

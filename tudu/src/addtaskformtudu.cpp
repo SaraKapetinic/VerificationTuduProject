@@ -1,4 +1,4 @@
-#include "headers/tudutask.h"
+#include "headers/addtaskformtudu.h"
 #include "ui_tudutask.h"
 
 TuduTask::TuduTask(QWidget *parent) :
