@@ -50,7 +50,55 @@
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="1" column="0">
+       <item row="8" column="0">
+        <widget class="QFrame" name="frame">
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QCheckBox" name="isAllDay">
+            <property name="text">
+             <string>All day</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBox">
+            <item>
+             <property name="text">
+              <string>Does not repeat</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Daily</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Weekly</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Monthly</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Annually</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="4" column="0">
         <widget class="QFrame" name="frame_2">
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
@@ -106,11 +154,61 @@
          </layout>
         </widget>
        </item>
-       <item row="7" column="0">
-        <widget class="QPlainTextEdit" name="taskDesc">
-         <property name="placeholderText">
-          <string>Add description</string>
+       <item row="3" column="0">
+        <widget class="QDateTimeEdit" name="dateTimeEnd"/>
+       </item>
+       <item row="11" column="0">
+        <widget class="QFrame" name="frame_3">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Priority: </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="taskPriority">
+            <item>
+             <property name="text">
+              <string>1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>4</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>5</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
        <item row="0" column="0">
@@ -139,55 +237,10 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="0">
-        <widget class="QFrame" name="frame">
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
-           <widget class="QCheckBox" name="checkBox">
-            <property name="text">
-             <string>All day</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="comboBox">
-            <item>
-             <property name="text">
-              <string>Does not repeat</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Daily</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Weekly</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Monthly</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Annually</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
-        </widget>
+       <item row="1" column="0">
+        <widget class="QDateTimeEdit" name="dateTimeStart"/>
        </item>
-       <item row="9" column="0">
+       <item row="12" column="0">
         <widget class="QPushButton" name="pbSaveTask">
          <property name="font">
           <font>
@@ -199,58 +252,18 @@
          </property>
         </widget>
        </item>
-       <item row="8" column="0">
-        <widget class="QFrame" name="frame_3">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
+       <item row="10" column="0">
+        <widget class="QPlainTextEdit" name="taskDesc">
+         <property name="placeholderText">
+          <string>Add description</string>
          </property>
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>to</string>
          </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <item>
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>Priority: </string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="comboBox_2">
-            <item>
-             <property name="text">
-              <string>*</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>**</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>***</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>****</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>*****</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
         </widget>
        </item>
       </layout>

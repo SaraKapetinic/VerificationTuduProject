@@ -5,6 +5,7 @@
 #include "headers/addtaskformtudu.h"
 #include "headers/init.h"
 #include <QTextEdit>
+#include <QStandardPaths>
 
 QList<QDate> currentWeek;
 
@@ -28,9 +29,6 @@ MainWindow::MainWindow(QWidget *parent) :
     for(int i=0;i<NUM_OF_WEEKDAYS;i++){
         currentWeek.append(init->getCurrentWeek()[i]);
     }
-
-
-
 
     auto tuduList = new TuduList(this);
     tuduList->addTask("'neki task 1'");
