@@ -5,6 +5,9 @@
 #include "headers/addtaskformtudu.h"
 #include "headers/init.h"
 #include <QTextEdit>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QFile>
 #include <QStandardPaths>
 
 QList<QDate> currentWeek;
@@ -29,6 +32,19 @@ MainWindow::MainWindow(QWidget *parent) :
     for(int i=0;i<NUM_OF_WEEKDAYS;i++){
         currentWeek.append(init->getCurrentWeek()[i]);
     }
+
+//    QString fileLocation = QString("%1/saveData.json").arg(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
+
+//    QFile jsonFile(fileLocation);
+//    jsonFile.open(QFile::ReadOnly);
+
+//    QJsonDocument jsonDoc = QJsonDocument().fromJson(jsonFile.readAll());
+
+//    QJsonObject jsonObject = jsonDoc.object();
+
+//    std::cout << jsonObject["taskTitle"].toString().toStdString() << std::endl;
+
+
 
     auto tuduList = new TuduList(this);
     tuduList->addTask("'neki task 1'");
