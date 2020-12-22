@@ -45,7 +45,6 @@ MainWindow::MainWindow(QWidget *parent) :
 //    std::cout << jsonObject["taskTitle"].toString().toStdString() << std::endl;
 
 
-
     auto tuduList = new TuduList(this);
     tuduList->addTask("'neki task 1'");
     tuduList->addTask("'neki task 2'");

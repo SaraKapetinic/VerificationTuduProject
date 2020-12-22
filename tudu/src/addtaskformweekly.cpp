@@ -42,7 +42,6 @@ void saveJson(QJsonDocument document, QString fileName) {
     jsonFile.write(document.toJson());
 }
 
-
 void AddTaskFormWeekly::on_pbSaveTask_clicked()
 {
     QString taskTitle = ui->taskTitle->text();
