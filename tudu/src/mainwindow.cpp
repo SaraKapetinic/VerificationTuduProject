@@ -30,6 +30,8 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
 
+    //TODO load JSON file here?
+
 
     auto tuduList = new TuduList(this);
     tuduList->addTask("'neki task 1'");
