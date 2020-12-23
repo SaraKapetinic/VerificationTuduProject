@@ -18,7 +18,19 @@ class Task : public QStandardItem
 {
 public:
 
-    Task(QString Tname, QString Tdescription = DESCRIPTION_DEFAULT , QDateTime TstartTime = STARTTIME_DEFAULT, QDateTime TendTime = ENDTIME_DEFAULT, QTime Tduration = DURATION_DEFAULT, qint32 Tpriority = PRIORITY_DEFAULT, bool TallDayLong = ALLDAYLONG_DEFAULT);
+    Task(QString Tname,
+        QString Tdescription = DESCRIPTION_DEFAULT,
+        QDateTime TstartTime = STARTTIME_DEFAULT,
+        QDateTime TendTime = ENDTIME_DEFAULT,
+        QTime Tduration = DURATION_DEFAULT,
+        qint32 Tpriority = PRIORITY_DEFAULT,
+        bool TallDayLong = ALLDAYLONG_DEFAULT
+        );
+
+    Task(QString Tname,
+        QString Tdescription,
+        qint32 Tpriority
+        );
 
     Task(Task &obj);
 

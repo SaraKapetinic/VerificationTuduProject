@@ -33,9 +33,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     auto tuduList = new TuduList(this);
-    tuduList->addTask("'neki task 1'");
-    tuduList->addTask("'neki task 2'");
-    tuduList->addTask("'neki task 3'");
 
     tuduList->setDragEnabled(true);
     tuduList->setAcceptDrops(true);
@@ -46,14 +43,19 @@ MainWindow::MainWindow(QWidget *parent) :
 
 }
 
+void MainWindow::recieveInTuduList(QString title, QString desc, int priority){
+    auto svi = ui->scrollAreaWidgetContents_2->findChildren<TuduList*>();
+    // TODO find a better way to do this (i.e. use findChild method)
+    foreach (auto obj, svi) {
+        obj->addTask(title, desc, priority);
+    }
+}
+
 void MainWindow::on_addTaskButtonClicked()
 {
-    qDebug("Adding a new task to TUDU");
-
-    // TODO - implement this
-   //auto tududu = ui->verticalLayoutTUDU->findChild<TuduList *>("TuduList");
-//    tududu->addTask("'neki novi task'");
+//    qDebug("Adding a new task to TUDU");
     AddTaskFormTudu *tDialog = new AddTaskFormTudu(this);
+    connect(tDialog, SIGNAL(sendToTuduList(QString, QString, int)), this, SLOT(recieveInTuduList(QString, QString, int)));
     tDialog->setModal(true);
     tDialog->exec();
 }

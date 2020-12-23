@@ -10,17 +10,16 @@ TuduList::TuduList(QWidget *parent) :
     setModel(new QStandardItemModel(this));
 }
 
-void TuduList::addTask(const QString &text)
+void TuduList::addTask(const QString &title, const QString desc, const int priority)
 {
-    auto *item = new Task(text);
-    item->setName(text);
+    auto *item = new Task(title, desc, priority);
+    item->setName(title);
 
     item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
     item->setDragEnabled(true);
-
     static_cast<QStandardItemModel *>(model())->appendRow(item);
     scrollToBottom();
-    }
+}
 
 
 
