@@ -21,6 +21,19 @@ Task::Task(
     this->allDayLong = TallDayLong;
 }
 
+Task::Task(
+        QJsonValue jsonValue)
+{
+    this->name = jsonValue["taskTitle"].toString();
+    this->description = jsonValue["taskDescription"].toString();
+    this->startTime = QDateTime::fromString(jsonValue["taskStartTime"].toString(), "dd.MM.yyyy. hh:mm");
+    this->endTime = QDateTime::fromString(jsonValue["taskEndTime"].toString(), "dd.MM.yyyy. hh:mm");
+    this->creationTime = QDateTime();
+    this->duration = QTime::fromString(jsonValue["taskDuration"].toString(), "hh:mm");
+    this->priority = jsonValue["taskPriority"].toInt();
+    this->allDayLong = 1;
+}
+
 Task::Task(Task &obj) :
     QStandardItem(obj.name)
 {

@@ -10,6 +10,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QVariant>
 
 QList<QDate> currentWeek;
 
@@ -40,28 +41,40 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QString fileLocation = QString("%1/tuduTasks.json").arg(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
 
+    // Open file for reading
     QFile file(fileLocation);
     file.open(QIODevice::ReadOnly | QIODevice::Text);
 
+    // Read JSON
     QJsonDocument jsonDocument = QJsonDocument::fromJson(file.readAll());
     file.close();
+    // Get array so we can see number of tasks in file
     QJsonArray jsonArray = jsonDocument.array();
 
-    // Prints out tasks in file
-//    int size = jsonArray.size();
-//    if(size != 0){
-//        std::cout << "Tasks: " << std::endl;
-//        for(int i = 0; i < size; i++){
-//            std::cout << "Task title: " << jsonDocument[i]["taskTitle"].toString().toStdString() << std::endl;
-//            std::cout << "Task description: " << jsonDocument[i]["taskDescription"].toString().toStdString() << std::endl;
-//            std::cout << "From: " <<  jsonDocument[i]["taskStartTime"].toString("dd.mm.yyyy. hh:mm").toStdString() << std::endl;
-//            std::cout << "To: " <<  jsonDocument[i]["taskEndTime"].toString().toStdString() << std::endl;
-//            std::cout << "---------------------------------------" << std::endl;
-//        }
-//    }
 
+    // Put tasks from file to Weekly table
+    int size = jsonArray.size();
+    if(size != 0){
+        for(int i = 0;i < size; i++){
+            QDateTime startTime = QDateTime::fromString(jsonDocument[i]["taskStartTime"].toString(), "dd.MM.yyyy. hh:mm");
+            QDate taskDate = startTime.date();
+            QTime taskStartTime = startTime.time();
+            Task *t = new Task(jsonDocument[i]);
+            qDebug() << t->getDescription();
 
+            auto model = ui->tableWidget->model();
+            // Determine row and column
+                // Row by multiplying hour with 4 because hour is separated in 4 parts in weekly table
+                    // and then adding minutes/15 (0,1,2,3)
+                // Column by getting what day of week is task date, -1 beacuse of indexing
+            model->setData(model->index(taskStartTime.hour()*4+taskStartTime.minute()/15, taskDate.dayOfWeek()-1),
+                           jsonDocument[i]["taskTitle"]);
 
+            // TODO Can we send a task object to a cell in our table?
+        }
+    }else{
+        std::cerr << "No tasks in file" << std::endl;
+    }
 
     auto tuduList = new TuduList(this);
     tuduList->addTask("'neki task 1'");
