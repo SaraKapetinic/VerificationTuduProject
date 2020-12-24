@@ -6,6 +6,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QStandardPaths>
+#include <QJsonArray>
 
 
 AddTaskFormWeekly::AddTaskFormWeekly(QWidget *parent, QTime time, QDate date, int row, int column) :
@@ -35,12 +36,32 @@ AddTaskFormWeekly::~AddTaskFormWeekly()
     delete ui;
 }
 
-void saveJson(QJsonDocument document, QString fileName) {
-    QFile jsonFile(fileName);
-    // Open file for appending
-    jsonFile.open(QFile::Append);
-    // Write data to file
-    jsonFile.write(document.toJson());
+void save(Task* task) {
+    QString saveLocation = QString("%1/tuduTasks.json").arg(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
+    QFile file(saveLocation);
+    file.open(QIODevice::ReadOnly);
+
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(file.readAll());
+    file.close();
+
+    auto taskData =
+            QJsonObject ({
+               qMakePair(QString("taskTitle"),  QJsonValue(task->getName())),
+               qMakePair(QString("taskDescription"),  QJsonValue(task->getDescription())),
+               qMakePair(QString("taskStartTime"),  QJsonValue(task->getStartTime().toString("dd.MM.yyyy. hh:mm"))),
+               qMakePair(QString("taskEndTime"),  QJsonValue(task->getEndTime().toString("dd.MM.yyyy. hh:mm"))),
+               qMakePair(QString("taskDuraton"),  QJsonValue(task->getDuration().toString())),
+               qMakePair(QString("taskPriority"),  QJsonValue(task->getPriority())),
+            });
+
+    QJsonArray jsonArray = jsonDocument.array();
+    jsonArray.push_back(taskData);
+
+
+    QJsonDocument final_doc(jsonArray);
+    file.open(QIODevice::WriteOnly);
+    file.write(final_doc.toJson());
+    file.close();
 }
 
 void AddTaskFormWeekly::on_pbSaveTask_clicked()
@@ -57,26 +78,7 @@ void AddTaskFormWeekly::on_pbSaveTask_clicked()
     // Create new task from values inputted
     Task* task = new Task(taskTitle, taskDesc, ui->dateTimeStart->dateTime(), ui->dateTimeEnd->dateTime(), DURATION_DEFAULT, PRIORITY_DEFAULT, 1);
 
-
-    QJsonDocument jsonDocument;
-    QJsonObject taskJsonObject;
-
-    // Create JSON key-value pairs
-    // TODO code below should be moved to a separate function
-    taskJsonObject.insert("taskTitle", task->getName());
-    taskJsonObject.insert("taskDescription", task->getDescription());
-    taskJsonObject.insert("taskStartTime", task->getStartTime().toString("hh:mm"));
-    taskJsonObject.insert("taskEndTime", task->getEndTime().toString("hh:mm"));
-    taskJsonObject.insert("taskDuration", task->getDuration().toString());
-    taskJsonObject.insert("taskPriority", task->getPriority());
-
-    // Set an object from those k-v pairs
-    jsonDocument.setObject(taskJsonObject);
-
-    // Pass path to desktop to save file there
-    QString saveLocation = QString("%1/tuduTasks.json").arg(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
-    saveJson(jsonDocument, saveLocation);
-
+    save(task);
 
     close();
 }

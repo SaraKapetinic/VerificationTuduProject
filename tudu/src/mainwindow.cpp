@@ -5,6 +5,11 @@
 #include "headers/addtaskformtudu.h"
 #include "headers/init.h"
 #include <QTextEdit>
+#include <QStandardPaths>
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 QList<QDate> currentWeek;
 
@@ -30,7 +35,32 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
 
-    //TODO load JSON file here?
+    // Load from file
+    // TODO move code to a separate function?
+
+    QString fileLocation = QString("%1/tuduTasks.json").arg(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
+
+    QFile file(fileLocation);
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(file.readAll());
+    file.close();
+    QJsonArray jsonArray = jsonDocument.array();
+
+    // Prints out tasks in file
+//    int size = jsonArray.size();
+//    if(size != 0){
+//        std::cout << "Tasks: " << std::endl;
+//        for(int i = 0; i < size; i++){
+//            std::cout << "Task title: " << jsonDocument[i]["taskTitle"].toString().toStdString() << std::endl;
+//            std::cout << "Task description: " << jsonDocument[i]["taskDescription"].toString().toStdString() << std::endl;
+//            std::cout << "From: " <<  jsonDocument[i]["taskStartTime"].toString("dd.mm.yyyy. hh:mm").toStdString() << std::endl;
+//            std::cout << "To: " <<  jsonDocument[i]["taskEndTime"].toString().toStdString() << std::endl;
+//            std::cout << "---------------------------------------" << std::endl;
+//        }
+//    }
+
+
 
 
     auto tuduList = new TuduList(this);
