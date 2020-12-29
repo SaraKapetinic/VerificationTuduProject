@@ -10,7 +10,7 @@ class TuduList : public QListView
 public:
     explicit TuduList(QWidget *parent = nullptr);
 public slots:
-    void addTask(const QString &text);
+    void addTask(const QString &title, const QString desc, const int priority);
 };
 
 #endif // TUDULIST_H

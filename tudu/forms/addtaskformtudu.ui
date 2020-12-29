@@ -34,12 +34,12 @@
       <height>359</height>
      </rect>
     </property>
-    <widget class="QLineEdit" name="tuduTaskLineEdit">
+    <widget class="QLineEdit" name="taskTitle">
      <property name="geometry">
       <rect>
        <x>12</x>
        <y>14</y>
-       <width>491</width>
+       <width>401</width>
        <height>61</height>
       </rect>
      </property>
@@ -50,58 +50,22 @@
       <string>Add Title</string>
      </property>
     </widget>
-    <widget class="QPlainTextEdit" name="tuduTaskPlainTextEdit">
+    <widget class="QPlainTextEdit" name="taskDesc">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>100</y>
-       <width>481</width>
-       <height>131</height>
+       <x>10</x>
+       <y>80</y>
+       <width>501</width>
+       <height>231</height>
       </rect>
      </property>
     </widget>
-    <widget class="QWidget" name="verticalLayoutWidget">
+    <widget class="QPushButton" name="tuduTaskSave">
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>260</y>
-       <width>160</width>
-       <height>83</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QRadioButton" name="radioButton_High">
-        <property name="text">
-         <string>High</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButton_Medium">
-        <property name="text">
-         <string>Medium</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="radioButton_Low">
-        <property name="text">
-         <string>Low</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QPushButton" name="tuduTaskPushButton">
-     <property name="geometry">
-      <rect>
-       <x>400</x>
+       <x>8</x>
        <y>320</y>
-       <width>89</width>
+       <width>501</width>
        <height>25</height>
       </rect>
      </property>
@@ -111,6 +75,31 @@
      <property name="checkable">
       <bool>false</bool>
      </property>
+    </widget>
+    <widget class="QComboBox" name="taskPriority">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>30</y>
+       <width>86</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string extracomment="0">High</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string extracomment="1">Medium</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string extracomment="2">Low</string>
+      </property>
+     </item>
     </widget>
    </widget>
   </widget>

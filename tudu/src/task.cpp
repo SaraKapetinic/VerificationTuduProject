@@ -21,8 +21,8 @@ Task::Task(
     this->allDayLong = TallDayLong;
 }
 
-Task::Task(
-        QJsonValue jsonValue)
+Task::Task(QJsonValue jsonValue) :
+        QStandardItem(jsonValue["taskTitle"].toString())
 {
     this->name = jsonValue["taskTitle"].toString();
     this->description = jsonValue["taskDescription"].toString();
@@ -32,6 +32,23 @@ Task::Task(
     this->duration = QTime::fromString(jsonValue["taskDuration"].toString(), "hh:mm");
     this->priority = jsonValue["taskPriority"].toInt();
     this->allDayLong = 1;
+}
+
+Task::Task(
+    QString Tname,
+    QString Tdescription,
+    qint32 Tpriority
+           ) :
+    QStandardItem(Tname)
+{
+    this->name = Tname;
+    this->description = Tdescription;
+    this->priority = Tpriority;
+    this->startTime = STARTTIME_DEFAULT;
+    this->endTime = ENDTIME_DEFAULT;
+    this->creationTime = QDateTime::currentDateTime();
+    this->duration = DURATION_DEFAULT;
+    this->allDayLong = ALLDAYLONG_DEFAULT;
 }
 
 Task::Task(Task &obj) :
@@ -117,7 +134,3 @@ void Task::setPriority(const qint32 &value)
 {
     priority = value;
 }
-
-
-
-

@@ -18,6 +18,7 @@ public:
 public slots:
   void on_addTaskButtonClicked();
   void recieveFromTask(QString taskTitle, int row, int column, int span);
+  void recieveInTuduList(QString title, QString desc, int priority);
 
 private slots:
   void on_tableWidget_cellDoubleClicked(int row, int column);
