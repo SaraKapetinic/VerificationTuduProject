@@ -11,6 +11,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QVariant>
+#include <QDir>
 
 QList<QDate> currentWeek;
 
@@ -19,6 +20,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    // TODO maybe move this check to main.cpp
+    if (!QDir(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)).exists()){
+        QDir().mkdir(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
+    }
 
     // Initialization class
     Init *init = new Init();
@@ -37,9 +43,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     // Load from file
-    // TODO move code to a separate function?
+    // TODO move the code below (up to 75ish) to the weekly table class
 
-    QString fileLocation = QString("%1/tuduTasks.json").arg(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
+    // TODO load the file location using a macro from task.cpp
+    QString fileLocation = QString("%1/weekly_tasks.json")
+            .arg(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
 
     // Open file for reading
     QFile file(fileLocation);
@@ -49,28 +57,20 @@ MainWindow::MainWindow(QWidget *parent) :
     QJsonDocument jsonDocument = QJsonDocument::fromJson(file.readAll());
     file.close();
     // Get array so we can see number of tasks in file
-    QJsonArray jsonArray = jsonDocument.array();
-
+    auto savedTasks = jsonDocument.object();
 
     // Put tasks from file to Weekly table
-    int size = jsonArray.size();
-    if(size != 0){
-        for(int i = 0;i < size; i++){
-            QDateTime startTime = QDateTime::fromString(jsonDocument[i]["taskStartTime"].toString(), "dd.MM.yyyy. hh:mm");
-            QDate taskDate = startTime.date();
-            QTime taskStartTime = startTime.time();
-            Task *t = new Task(jsonDocument[i]);
-            qDebug() << t->getDescription();
+    if(savedTasks.size() != 0){
+        auto model = ui->tableWidget->model();
+        foreach(const QString& key, savedTasks.keys()){
+            // TODO add a check to see if the task is in the current week
+            // if (isCurrentWeem(key)) or something like that
+            auto currentTask = new Task(savedTasks.value(key));
+            auto taskColumn = currentTask->getStartTime().date().dayOfWeek() - 1;
+            auto task_row = currentTask->getStartTime().time().msecsSinceStartOfDay() / (1000 * 60 * 15);
 
-            auto model = ui->tableWidget->model();
-            // Determine row and column
-                // Row by multiplying hour with 4 because hour is separated in 4 parts in weekly table
-                    // and then adding minutes/15 (0,1,2,3)
-                // Column by getting what day of week is task date, -1 beacuse of indexing
-            model->setData(model->index(taskStartTime.hour()*4+taskStartTime.minute()/15, taskDate.dayOfWeek()-1),
-                           jsonDocument[i]["taskTitle"]);
-
-            // TODO Can we send a task object to a cell in our table?
+            // TODO send a task object to the cell in our table
+            model->setData(model->index(task_row, taskColumn),currentTask->getName());
         }
     }else{
         std::cerr << "No tasks in file" << std::endl;
@@ -88,11 +88,7 @@ MainWindow::MainWindow(QWidget *parent) :
 }
 
 void MainWindow::recieveInTuduList(QString title, QString desc, int priority){
-    auto svi = ui->scrollAreaWidgetContents_2->findChildren<TuduList*>();
-    // TODO find a better way to do this (i.e. use findChild method)
-    foreach (auto obj, svi) {
-        obj->addTask(title, desc, priority);
-    }
+    ui->scrollAreaWidgetContents_2->findChildren<TuduList*>()[0]->addTask(title, desc, priority);
 }
 
 void MainWindow::on_addTaskButtonClicked()

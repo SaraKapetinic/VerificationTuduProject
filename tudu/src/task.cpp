@@ -1,4 +1,13 @@
 #include "headers/task.h"
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QStandardPaths>
+#include <QJsonArray>
+#include <QFile>
+#include <iostream>
+
+#define START_END_TIME_FORMAT "dd.MM.yyyy. hh:mm"
+#define CREATION_TIME_FORMAT "dd.MM.yyyy.hh:mm:ms"
 
 
 Task::Task(
@@ -22,15 +31,15 @@ Task::Task(
 }
 
 Task::Task(QJsonValue jsonValue) :
-        QStandardItem(jsonValue["taskTitle"].toString())
+        QStandardItem(jsonValue["title"].toString())
 {
-    this->name = jsonValue["taskTitle"].toString();
-    this->description = jsonValue["taskDescription"].toString();
-    this->startTime = QDateTime::fromString(jsonValue["taskStartTime"].toString(), "dd.MM.yyyy. hh:mm");
-    this->endTime = QDateTime::fromString(jsonValue["taskEndTime"].toString(), "dd.MM.yyyy. hh:mm");
-    this->creationTime = QDateTime();
-    this->duration = QTime::fromString(jsonValue["taskDuration"].toString(), "hh:mm");
-    this->priority = jsonValue["taskPriority"].toInt();
+    this->name = jsonValue["title"].toString();
+    this->description = jsonValue["description"].toString();
+    this->startTime = QDateTime::fromString(jsonValue["startTime"].toString(), START_END_TIME_FORMAT);
+    this->endTime = QDateTime::fromString(jsonValue["endTime"].toString(), START_END_TIME_FORMAT);
+    this->creationTime = QDateTime::fromString(jsonValue["creationTime"].toString(), CREATION_TIME_FORMAT);
+    this->duration = QTime::fromString(jsonValue["duration"].toString(), "hh:mm");
+    this->priority = jsonValue["priority"].toInt();
     this->allDayLong = 1;
 }
 
@@ -133,4 +142,38 @@ qint32 Task::getPriority() const
 void Task::setPriority(const qint32 &value)
 {
     priority = value;
+}
+
+void Task::save(QString fileName) {
+
+    // TODO add a check if the file name is valid
+
+    QString saveLocation = QString("%1/%2.json")
+            .arg(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation), fileName);
+    std::cout<<saveLocation.toStdString();
+    QFile file(saveLocation);
+    file.open(QIODevice::ReadOnly);
+
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(file.readAll());
+    file.close();
+
+    auto creationTime = this->getCreationTime().toString(CREATION_TIME_FORMAT);
+    auto data =
+            QJsonObject ({
+               qMakePair(QString("title"),  QJsonValue(this->getName())),
+               qMakePair(QString("description"),  QJsonValue(this->getDescription())),
+               qMakePair(QString("startTime"),  QJsonValue(this->getStartTime().toString(START_END_TIME_FORMAT))),
+               qMakePair(QString("endTime"),  QJsonValue(this->getEndTime().toString(START_END_TIME_FORMAT))),
+               qMakePair(QString("creationTime"),  QJsonValue(creationTime)),
+               qMakePair(QString("duraton"),  QJsonValue(this->getDuration().toString())),
+               qMakePair(QString("priority"),  QJsonValue(this->getPriority())),
+            });
+
+    auto jsonArray = jsonDocument.object();
+    jsonArray.insert(creationTime, data);
+
+    QJsonDocument final_doc(jsonArray);
+    file.open(QIODevice::WriteOnly);
+    file.write(final_doc.toJson());
+    file.close();
 }

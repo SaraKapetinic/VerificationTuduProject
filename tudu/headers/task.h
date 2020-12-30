@@ -58,6 +58,8 @@ public:
     qint32 getPriority() const;
     void setPriority(const qint32 &value);
 
+    void save(QString fileName);
+
 protected:
     QString name;
     QString description;
