@@ -18,7 +18,7 @@ class Init
 public:
     Init();
 
-    void setDays(Ui::MainWindow* ui);
+    void setDays(Ui::MainWindow* ui, QDate currentDate);
     void setHeaders(Ui::MainWindow* ui);
     void setDesign(Ui::MainWindow* ui);
 

@@ -2,9 +2,8 @@
 
 Init::Init(){}
 
-void Init::setDays(Ui::MainWindow* ui){
+void Init::setDays(Ui::MainWindow* ui, QDate currentDate){
 
-    QDate currentDate = ui->calendarMonths->selectedDate();
 
     // Ordinal number of current day (Monday = 1; ... ; Sunday = 7)
     int currentDayOfWeek = getCurrentDayOfWeek(ui);
@@ -24,8 +23,8 @@ void Init::setDays(Ui::MainWindow* ui){
     // Fill list currentWeek and make header text
 
     for(int i = 0;i<NUM_OF_WEEKDAYS;i++){
-        m_currentWeek.append(currentDate.addDays(daysAdded[i]));
-        m_horizontalHeaders.append(ui->tableWidget->horizontalHeaderItem(i)->text().append(currentDate.addDays(daysAdded[i]).toString("\ndd.MM.yyyy.")));
+            m_currentWeek.append(currentDate.addDays(daysAdded[i]));
+            m_horizontalHeaders.append(ui->tableWidget->horizontalHeaderItem(i)->text().append(currentDate.addDays(daysAdded[i]).toString("\ndd.MM.yyyy.")));
     }
 
 }
@@ -54,9 +53,6 @@ void Init::setHeaders(Ui::MainWindow* ui){
 
 }
 
-void Init::setDesign(Ui::MainWindow *ui) {
-    ui->tableWidget->setStyleSheet("background-color: red;");
-}
 
 QList<QDate> Init::getCurrentWeek() {
     return m_currentWeek;
