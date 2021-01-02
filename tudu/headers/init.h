@@ -1,17 +1,17 @@
 #ifndef INIT_H
 #define INIT_H
 
-#include<iostream>
+#include <iostream>
 #include <QWidget>
 #include <QDate>
 #include <QColor>
 #include "ui_mainwindow.h"
 
-#define NUM_OF_WEEKDAYS 7
-#define HOURS_IN_DAY 24
-#define MINUTES_IN_HOUR 60
-#define MINUTE_INCREMENTS 15
-#define SECONDS_IN_MINUTE 60
+#define NUM_OF_WEEKDAYS (7)
+#define HOURS_IN_DAY (24)
+#define MINUTES_IN_HOUR (60)
+#define MINUTE_INCREMENTS (15)
+#define SECONDS_IN_MINUTE (60)
 
 class Init
 {

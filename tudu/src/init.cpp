@@ -21,10 +21,10 @@ void Init::setDays(Ui::MainWindow* ui, QDate currentDate){
     }
 
     // Fill list currentWeek and make header text
-
     for(int i = 0;i<NUM_OF_WEEKDAYS;i++){
             m_currentWeek.append(currentDate.addDays(daysAdded[i]));
-            m_horizontalHeaders.append(ui->tableWidget->horizontalHeaderItem(i)->text().append(currentDate.addDays(daysAdded[i]).toString("\ndd.MM.yyyy.")));
+            m_horizontalHeaders
+                .append(currentDate.addDays(daysAdded[i]).toString("dddd\ndd.MM.yyyy."));
     }
 
 }

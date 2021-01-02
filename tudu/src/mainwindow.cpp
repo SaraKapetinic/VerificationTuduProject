@@ -25,9 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     // Append to list so we can use it in cellDoubleClicked
-    for(int i=0;i<NUM_OF_WEEKDAYS;i++){
-        currentWeek.append(init->getCurrentWeek()[i]);
-    }
+    currentWeek = init->getCurrentWeek();
 
     auto tuduList = new TuduList(this);
 
