@@ -12,7 +12,7 @@
 #include <QStandardItem>
 #include <QDateTime>
 #include <QTime>
-
+#include <QJsonValue>
 
 class Task : public QStandardItem
 {
@@ -31,6 +31,8 @@ public:
         QString Tdescription,
         qint32 Tpriority
         );
+
+    Task(QJsonValue jsonValue);
 
     Task(Task &obj);
 
@@ -55,6 +57,8 @@ public:
 
     qint32 getPriority() const;
     void setPriority(const qint32 &value);
+
+    void save(QString fileName);
 
 protected:
     QString name;
