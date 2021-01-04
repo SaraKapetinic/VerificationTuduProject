@@ -18,7 +18,7 @@ AddTaskFormWeekly::AddTaskFormWeekly(QWidget *parent, QTime time, QDate date, in
 
     // Fill out form with time and date based on clicked cell
     ui->dateTimeStart->setDate(m_date);
-    ui->dateTimeEnd->setTime(m_time);
+    ui->dateTimeStart->setTime(m_time);
 
     // Suppose it's a one-day task
     ui->dateTimeEnd->setDate(m_date);
