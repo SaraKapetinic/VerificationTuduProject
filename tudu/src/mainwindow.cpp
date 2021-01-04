@@ -129,6 +129,7 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
     QDate date = currentWeek[column];
 
     AddTaskFormWeekly *mDialog = new AddTaskFormWeekly(this, time, date, row, column);
+    mDialog->setWindowTitle("Add New Task");
 
     // Send data from form to main window
     connect(mDialog, SIGNAL(sendToCalendar(QString, int, int, int)), this, SLOT(recieveFromTask(QString, int, int, int)));

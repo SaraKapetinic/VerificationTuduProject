@@ -78,8 +78,14 @@
         <widget class="QPushButton" name="pbSaveTask">
          <property name="font">
           <font>
-           <pointsize>12</pointsize>
+           <pointsize>-1</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: #160c28;
+color: #e1efe6;
+height: 35px;
+font-size: 20px;</string>
          </property>
          <property name="text">
           <string>Save</string>
