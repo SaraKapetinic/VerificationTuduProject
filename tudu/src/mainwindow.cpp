@@ -233,12 +233,12 @@ void MainWindow::on_listView_doubleClicked(const QModelIndex &index)
     AddTaskFormTudu *tDialog = new AddTaskFormTudu(this);
     tDialog->setWindowTitle("Update Task");
 
-    int row = index.row();
+    tDialog->setTitle(index.data(NAME_ROLE).toString());
+    tDialog->setDescription(index.data(DESCRIPTION_ROLE).toString());
+    tDialog->setPriority(index.data(PRIORITY_ROLE).toInt());
 
-
-
-
-  //  connect(tDialog, SIGNAL(sendToTuduList(QString, QString, int)), this, SLOT(recieveInTuduList(QString, QString, int)));
+    connect(tDialog, SIGNAL(sendToTuduList(QString, QString, int)),
+            this, SLOT(recieveInTuduList(QString, QString, int)));
 
 
     tDialog->setModal(true);

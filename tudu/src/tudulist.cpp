@@ -29,7 +29,7 @@ void TuduList::addTask(Task *task){
     // set the items data to apropriate values
     task->setData(QVariant::fromValue<QString>(task->getName()), NAME_ROLE);
     task->setData(QVariant::fromValue<QString>(task->getDescription()), DESCRIPTION_ROLE);
-    task->setData(QVariant::fromValue<int>(task->getPriority()), PRIORITY_DEFAULT);
+    task->setData(QVariant::fromValue<int>(task->getPriority()), PRIORITY_ROLE);
     task->setData(QVariant::fromValue<QString>(task->getCreationTimeString()),
                   CREATIONTIME_ROLE);
 
