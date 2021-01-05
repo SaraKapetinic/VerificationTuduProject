@@ -2,9 +2,8 @@
 
 Init::Init(){}
 
-void Init::setDays(Ui::MainWindow* ui){
+void Init::setDays(Ui::MainWindow* ui, QDate currentDate){
 
-    QDate currentDate = ui->calendarMonths->selectedDate();
 
     // Ordinal number of current day (Monday = 1; ... ; Sunday = 7)
     int currentDayOfWeek = getCurrentDayOfWeek(ui);
@@ -12,6 +11,10 @@ void Init::setDays(Ui::MainWindow* ui){
     // Highlight current day header
     QColor headerColor = QColor(22, 12, 40);
     QColor textColor = QColor(225, 239, 230);
+    for (int i=0; i<7; i++) {
+        ui->tableWidget->horizontalHeaderItem(i)->setBackground(textColor);
+        ui->tableWidget->horizontalHeaderItem(currentDayOfWeek-1)->setForeground(headerColor);
+    }
     ui->tableWidget->horizontalHeaderItem(currentDayOfWeek-1)->setBackground(headerColor);
     ui->tableWidget->horizontalHeaderItem(currentDayOfWeek-1)->setForeground(textColor);
 
@@ -24,10 +27,10 @@ void Init::setDays(Ui::MainWindow* ui){
     }
 
     // Fill list currentWeek and make header text
-
     for(int i = 0;i<NUM_OF_WEEKDAYS;i++){
-        m_currentWeek.append(currentDate.addDays(daysAdded[i]));
-        m_horizontalHeaders.append(ui->tableWidget->horizontalHeaderItem(i)->text().append(currentDate.addDays(daysAdded[i]).toString("\ndd.MM.yyyy.")));
+            m_currentWeek.append(currentDate.addDays(daysAdded[i]));
+            m_horizontalHeaders
+                .append(currentDate.addDays(daysAdded[i]).toString("dddd\ndd.MM.yyyy."));
     }
 
 }
@@ -51,21 +54,18 @@ void Init::setHeaders(Ui::MainWindow* ui){
     }
 
     ui->tableWidget->setVerticalHeaderLabels(m_verticalHeaders);
-    ui->tableWidget->verticalHeaderItem(getCurrentTimeRow(ui))->setBackground(QBrush(QColor(22, 12, 40)));
-    ui->tableWidget->verticalHeaderItem(getCurrentTimeRow(ui))->setForeground(QBrush(QColor(225, 239, 230)));
-    ui->tableWidget->setCurrentCell(getCurrentTimeRow(ui), currentDayOfWeek-1);
+    ui->tableWidget->verticalHeaderItem(getCurrentTimeRow())->setBackground(QBrush(QColor(22, 12, 40)));
+    ui->tableWidget->verticalHeaderItem(getCurrentTimeRow())->setForeground(QBrush(QColor(225, 239, 230)));
+    ui->tableWidget->setCurrentCell(getCurrentTimeRow(), currentDayOfWeek-1);
 
 }
 
-void Init::setDesign(Ui::MainWindow *ui) {
-    ui->tableWidget->setStyleSheet("background-color: red;");
-}
 
 QList<QDate> Init::getCurrentWeek() {
     return m_currentWeek;
 }
 
-int Init::getCurrentTimeRow(Ui::MainWindow* ui) {
+int Init::getCurrentTimeRow() {
 
     // Get current hour
     int currentHour = QTime::currentTime().hour();

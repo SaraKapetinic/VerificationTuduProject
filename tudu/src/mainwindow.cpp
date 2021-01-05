@@ -30,17 +30,14 @@ MainWindow::MainWindow(QWidget *parent) :
     Init *init = new Init();
 
     // Methods to set up mainwindow
-    init->setDays(ui);
+    init->setDays(ui, ui->calendarMonths->selectedDate());
     init->setHeaders(ui);
 
     // Make table fill entire widget
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     // Append to list so we can use it in cellDoubleClicked
-    for(int i=0;i<NUM_OF_WEEKDAYS;i++){
-        currentWeek.append(init->getCurrentWeek()[i]);
-    }
-
+    currentWeek = init->getCurrentWeek();
 
     // Load from file
     // TODO move the code below (up to 75ish) to the weekly table class
@@ -135,5 +132,17 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
     connect(mDialog, SIGNAL(sendToCalendar(QString, int, int, int)), this, SLOT(recieveFromTask(QString, int, int, int)));
     mDialog->setModal(true);
     mDialog->exec();
+
+}
+
+void MainWindow::on_calendarMonths_activated(const QDate &date)
+{
+
+    Init *init = new Init();
+    init->setDays(ui, date);
+    init->setHeaders(ui);
+
+    ui->tabWidget->setCurrentWidget(ui->tabWeekTest);
+
 
 }
