@@ -129,6 +129,9 @@ color: #160c28;</string>
               <property name="dragEnabled">
                <bool>true</bool>
               </property>
+              <property name="dragDropOverwriteMode">
+               <bool>true</bool>
+              </property>
               <property name="dragDropMode">
                <enum>QAbstractItemView::DragDrop</enum>
               </property>
