@@ -15,22 +15,28 @@ void TuduList::addTask(const QString &title, const QString desc, const int prior
 {
     auto *item = new Task(title, desc, priority);
 
-    auto icon = item->fetchIcon(priority);
-    item->setIcon(icon);
+    this->addTask(item);
 
-    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-    item->setDragEnabled(true);
-
-    // set the items data to apropriate values
-    item->setData(QVariant::fromValue<QString>(title), NAME_ROLE);
-    item->setData(QVariant::fromValue<QString>(desc), DESCRIPTION_ROLE);
-    item->setData(QVariant::fromValue<int>(priority), PRIORITY_DEFAULT);
-    item->setData(QVariant::fromValue<QString>(item->getCreationTimeString()),
-                  CREATIONTIME_ROLE);
-
-    static_cast<QStandardItemModel *>(model())->appendRow(item);
-    scrollToBottom();
 }
 
+void TuduList::addTask(Task *task){
+
+    auto icon = task->fetchIcon(task->getPriority());
+
+    task->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+    task->setDragEnabled(true);
+
+    // set the items data to apropriate values
+    task->setData(QVariant::fromValue<QString>(task->getName()), NAME_ROLE);
+    task->setData(QVariant::fromValue<QString>(task->getDescription()), DESCRIPTION_ROLE);
+    task->setData(QVariant::fromValue<int>(task->getPriority()), PRIORITY_ROLE);
+    task->setData(QVariant::fromValue<QString>(task->getCreationTimeString()),
+                  CREATIONTIME_ROLE);
+
+    task->setIcon(icon);
+
+    static_cast<QStandardItemModel *>(model())->appendRow(task);
+    scrollToBottom();
+}
 
 

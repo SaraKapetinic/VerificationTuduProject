@@ -50,19 +50,41 @@
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="8" column="0">
-        <widget class="QFrame" name="frame">
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>To</string>
          </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout"/>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QDateTimeEdit" name="dateTimeStart"/>
+       <item row="4" column="0">
+        <widget class="QDateTimeEdit" name="dateTimeEnd"/>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLineEdit" name="taskTitle">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>24</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="maxLength">
+          <number>1024</number>
+         </property>
+         <property name="frame">
+          <bool>false</bool>
+         </property>
+         <property name="placeholderText">
+          <string>Add title</string>
+         </property>
+        </widget>
        </item>
        <item row="11" column="0">
         <widget class="QFrame" name="frame_3">
@@ -91,17 +113,14 @@
          <property name="placeholderText">
           <string>Add description</string>
          </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_5">
-         <property name="text">
-          <string>To</string>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
          </property>
+         <layout class="QHBoxLayout" name="horizontalLayout"/>
         </widget>
        </item>
-       <item row="4" column="0">
-        <widget class="QDateTimeEdit" name="dateTimeEnd"/>
+       <item row="2" column="0">
+        <widget class="QDateTimeEdit" name="dateTimeStart"/>
        </item>
        <item row="12" column="0">
         <widget class="QPushButton" name="pbSaveTask">
@@ -121,6 +140,13 @@ font-size: 20px;</string>
          </property>
         </widget>
        </item>
+       <item row="10" column="0">
+        <widget class="QPlainTextEdit" name="taskDesc">
+         <property name="placeholderText">
+          <string>Add description</string>
+         </property>
+        </widget>
+       </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_4">
          <property name="text">
@@ -128,29 +154,10 @@ font-size: 20px;</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="0">
-        <widget class="QLineEdit" name="taskTitle">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>24</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="maxLength">
-          <number>1024</number>
-         </property>
-         <property name="frame">
-          <bool>false</bool>
-         </property>
-         <property name="placeholderText">
-          <string>Add title</string>
+       <item row="13" column="0">
+        <widget class="QPushButton" name="pbDeleteTask">
+         <property name="text">
+          <string>Delete</string>
          </property>
         </widget>
        </item>

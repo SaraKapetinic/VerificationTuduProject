@@ -11,6 +11,7 @@ public:
     explicit TuduList(QWidget *parent = nullptr);
 public slots:
     void addTask(const QString &title, const QString desc, const int priority);
+    void addTask(Task *task);
 };
 
 #endif // TUDULIST_H
