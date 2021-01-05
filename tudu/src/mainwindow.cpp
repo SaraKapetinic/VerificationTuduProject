@@ -32,9 +32,6 @@ MainWindow::MainWindow(QWidget *parent) :
     week = new WeeklyView(ui);
     week->execute();
 
-    // Append to list so we can use it in cellDoubleClicked
-    currentWeek.append(week->getCurrentWeek());
-
     auto size = new QSize(0,0);
     ui->tableWidget->setIconSize(*size);
 
@@ -87,7 +84,7 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
 {
 
     QTime time = QTime::fromString(ui->tableWidget->verticalHeaderItem(row)->text(), "hh:mm");
-    QDate date = currentWeek[column];
+    QDate date = week->getCurrentWeek().at(column);
 
     AddTaskFormWeekly *mDialog = new AddTaskFormWeekly(this, time, date, row, column);
     mDialog->setWindowTitle("Add New Task");

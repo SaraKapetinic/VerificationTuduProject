@@ -124,7 +124,9 @@ void WeeklyView::loadFromJson(){
     // Put tasks from file to Weekly table
     if(savedTasks.size() != 0){
         foreach(const QString& key, savedTasks.keys()){
-            QDate dateTask = QDateTime::fromString(key, CREATION_TIME_FORMAT).date();
+            QDate dateTask = QDateTime::fromString(savedTasks.value(key)["startTime"]
+                    .toString(), START_END_TIME_FORMAT)
+                    .date();
 
             // Check if the task is in the current week
             if (dateTask >= m_currentWeek.first() && dateTask <= m_currentWeek.last()) {

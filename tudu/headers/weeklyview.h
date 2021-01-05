@@ -44,6 +44,7 @@ private:
     QStringList m_verticalHeaders;
     QList<QDate> m_currentWeek;
     QDate m_selectedDate;
+    QList<Task> m_weeklyTasks;
     QColor m_headerPrimaryColor = QColor(225, 239, 230);
     QColor m_headerSecondaryColor = QColor(22, 12, 40);
 };
