@@ -6,9 +6,6 @@
 #include <QFile>
 #include <iostream>
 
-#define START_END_TIME_FORMAT "dd.MM.yyyy. hh:mm"
-#define CREATION_TIME_FORMAT "dd.MM.yyyy.hh:mm:ms"
-
 
 Task::Task(
         QString Tname,
@@ -124,6 +121,11 @@ QDateTime Task::getCreationTime() const
     return creationTime;
 }
 
+QString Task::getCreationTimeString() const
+{
+    return creationTime.toString(CREATION_TIME_FORMAT);
+}
+
 QTime Task::getDuration() const
 {
     return duration;
@@ -157,7 +159,7 @@ void Task::save(QString fileName) {
     QJsonDocument jsonDocument = QJsonDocument::fromJson(file.readAll());
     file.close();
 
-    auto creationTime = this->getCreationTime().toString(CREATION_TIME_FORMAT);
+    auto creationTime = this->getCreationTimeString();
     auto data =
             QJsonObject ({
                qMakePair(QString("title"),  QJsonValue(this->getName())),

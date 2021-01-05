@@ -8,6 +8,16 @@
 #define PRIORITY_DEFAULT (1)
 #define ALLDAYLONG_DEFAULT (false)
 
+#define START_END_TIME_FORMAT "dd.MM.yyyy. hh:mm"
+#define CREATION_TIME_FORMAT "dd.MM.yyyy.hh:mm:ms"
+
+#define NAME_ROLE (1)
+#define DESCRIPTION_ROLE (2)
+#define STARTTIME_ROLE (3)
+#define ENDTIME_ROLE (4)
+#define DURATION_ROLE (5)
+#define PRIORITY_ROLE (6)
+#define CREATIONTIME_ROLE (7)
 
 #include <QStandardItem>
 #include <QDateTime>
@@ -51,6 +61,7 @@ public:
     void setEndTime(const QDateTime &value);
 
     QDateTime getCreationTime() const;
+    QString getCreationTimeString() const;
 
     QTime getDuration() const;
     void setDuration(const QTime &value);
