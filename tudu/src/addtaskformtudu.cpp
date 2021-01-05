@@ -18,7 +18,11 @@ void AddTaskFormTudu::on_tuduTaskSave_clicked(){
     auto taskDesc = ui->taskDesc->toPlainText();
     auto taskPriority = ui->taskPriority->currentIndex();
 
+    Task* task = new Task(taskTitle,taskDesc,taskPriority);
+
     emit sendToTuduList(taskTitle, taskDesc, taskPriority);
+
+    task->save("tuduList_tasks");
 
     close();
 }

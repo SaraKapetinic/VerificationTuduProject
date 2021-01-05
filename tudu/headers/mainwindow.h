@@ -22,7 +22,7 @@ public slots:
   void recieveFromTask(Task* task, int row, int column, int span);
   void recieveDeleteFromTask(int row, int column);
   void recieveInTuduList(QString title, QString desc, int priority);
-
+  void loadTuduFromJson();
 private slots:
   void on_tableWidget_cellDoubleClicked(int row, int column);
 

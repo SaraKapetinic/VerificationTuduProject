@@ -2,6 +2,7 @@
 #define ADDTASKFORMTUDU_H
 
 #include <QDialog>
+#include "headers/task.h"
 
 #define HIGH_PRIORITY (0)
 #define MID_PRIORITY (1)
