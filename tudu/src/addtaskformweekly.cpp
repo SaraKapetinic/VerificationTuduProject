@@ -42,14 +42,31 @@ void AddTaskFormWeekly::on_pbSaveTask_clicked()
     int end = ui->dateTimeEnd->time().hour() * 60 + ui->dateTimeEnd->time().minute();
     int span = (end - start)/15;
 
-    emit sendToCalendar(taskTitle, m_row, m_column, span);
 
     // Create new task from values inputted
     Task* task = new Task(taskTitle, taskDesc, ui->dateTimeStart->dateTime(), ui->dateTimeEnd->dateTime(), DURATION_DEFAULT, PRIORITY_DEFAULT, 1);
 
+    emit sendToCalendar(task, m_row, m_column, span);
     // TODO this should not be done here...
     // We should move the saving functionality to weekly view and tudu list classes.
     task->save("weekly_tasks");
 
     close();
 }
+
+void AddTaskFormWeekly::SetTaskTitle(QString TaskName){
+    ui->taskTitle->setText(TaskName);
+}
+
+void AddTaskFormWeekly::SetTaskDescription(QString TaskDescription){
+    ui->taskDesc->insertPlainText(TaskDescription);
+}
+
+void AddTaskFormWeekly::SetTaskStartTime(QDateTime TaskStartTime){
+    ui->dateTimeStart->setDateTime(TaskStartTime);
+}
+
+void AddTaskFormWeekly::SetTaskEndTime(QDateTime TaskEndTime){
+    ui->dateTimeEnd->setDateTime(TaskEndTime);
+}
+
