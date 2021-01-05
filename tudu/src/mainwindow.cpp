@@ -76,14 +76,8 @@ MainWindow::MainWindow(QWidget *parent) :
         std::cerr << "No tasks in file" << std::endl;
     }
 
-    auto tuduList = new TuduList(this);
-
-    tuduList->setDragEnabled(true);
-    tuduList->setAcceptDrops(true);
-    tuduList->setDropIndicatorShown(true);
-    tuduList->setDefaultDropAction(Qt::MoveAction);
-
-    ui->verticalLayoutTUDU->addWidget(tuduList);
+    auto size = new QSize(0,0);
+    ui->tableWidget->setIconSize(*size);
 
 }
 
@@ -137,3 +131,4 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
     mDialog->exec();
 
 }
+

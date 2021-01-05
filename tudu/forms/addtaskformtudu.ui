@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>AddTaskFormTudu</class>
  <widget class="QDialog" name="AddTaskFormTudu">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -10,8 +13,14 @@
     <height>379</height>
    </rect>
   </property>
+  <property name="mouseTracking">
+   <bool>true</bool>
+  </property>
   <property name="windowTitle">
    <string>Add Task</string>
+  </property>
+  <property name="windowOpacity">
+   <double>1.000000000000000</double>
   </property>
   <widget class="QScrollArea" name="scrollArea">
    <property name="geometry">
@@ -21,6 +30,9 @@
      <width>521</width>
      <height>361</height>
     </rect>
+   </property>
+   <property name="sizeAdjustPolicy">
+    <enum>QAbstractScrollArea::AdjustIgnored</enum>
    </property>
    <property name="widgetResizable">
     <bool>true</bool>
@@ -39,7 +51,7 @@
       <rect>
        <x>12</x>
        <y>14</y>
-       <width>401</width>
+       <width>391</width>
        <height>61</height>
       </rect>
      </property>
@@ -47,7 +59,7 @@
       <font>
        <family>Ubuntu</family>
        <pointsize>19</pointsize>
-       <weight>7</weight>
+       <weight>50</weight>
        <italic>false</italic>
        <bold>false</bold>
       </font>
@@ -101,31 +113,51 @@ height: 35px;</string>
     <widget class="QComboBox" name="taskPriority">
      <property name="geometry">
       <rect>
-       <x>420</x>
+       <x>410</x>
        <y>30</y>
-       <width>86</width>
+       <width>101</width>
        <height>25</height>
       </rect>
      </property>
+     <property name="editable">
+      <bool>false</bool>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
      <item>
       <property name="text">
-       <string extracomment="0">High</string>
+       <string>High</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../resources.qrc">
+        <normaloff>:/resources/resources/png/high_priority.png</normaloff>:/resources/resources/png/high_priority.png</iconset>
       </property>
      </item>
      <item>
       <property name="text">
-       <string extracomment="1">Medium</string>
+       <string>Medium</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../resources.qrc">
+        <normaloff>:/resources/resources/png/mid_priority.png</normaloff>:/resources/resources/png/mid_priority.png</iconset>
       </property>
      </item>
      <item>
       <property name="text">
-       <string extracomment="2">Low</string>
+       <string>Low</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../resources.qrc">
+        <normaloff>:/resources/resources/png/low_priority.png</normaloff>:/resources/resources/png/low_priority.png</iconset>
       </property>
      </item>
     </widget>
    </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
