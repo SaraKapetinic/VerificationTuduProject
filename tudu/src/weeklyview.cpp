@@ -143,8 +143,11 @@ void WeeklyView::loadFromJson(){
                 item->setData(DESCRIPTION_ROLE, QVariant::fromValue<QString>(currentTask->getDescription()));
                 item->setData(CREATIONTIME_ROLE,QVariant::fromValue<QString>(currentTask->getCreationTimeString()));
                 item->setText(currentTask->getName());
+                QColor taskColor = QColor(239, 138, 23);
+                item->setBackground(taskColor);
+                item->setTextAlignment(Qt::AlignCenter);
                 m_ui->tableWidget->setItem(taskRow, taskColumn, item);
-                m_ui->tableWidget->setSpan(taskRow, taskColumn, span, 1);
+                m_ui->tableWidget->setSpan(taskRow, taskColumn, span+2, 1);
             }
         }
     }else{

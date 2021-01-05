@@ -41,8 +41,8 @@ color: #160c28;</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>922</width>
-         <height>519</height>
+         <width>1278</width>
+         <height>718</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout">
@@ -123,13 +123,13 @@ color: #160c28;</string>
               <property name="autoFillBackground">
                <bool>true</bool>
               </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
               <property name="sizeAdjustPolicy">
                <enum>QAbstractScrollArea::AdjustIgnored</enum>
               </property>
               <property name="dragEnabled">
-               <bool>false</bool>
-              </property>
-              <property name="dragDropOverwriteMode">
                <bool>false</bool>
               </property>
               <property name="dragDropOverwriteMode">
@@ -365,8 +365,8 @@ height: 20px;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>158</width>
-                <height>445</height>
+                <width>250</width>
+                <height>659</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_2">

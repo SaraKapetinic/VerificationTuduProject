@@ -73,8 +73,9 @@ void MainWindow::recieveFromTask(Task* task, int row, int column, int span){
     item->setText(task->getName());
 
     // Set color of scheduled task
-    QColor taskColor = QColor(0, 204, 204);
+    QColor taskColor = QColor(239, 138, 23);
     item->setBackground(taskColor);
+    item->setTextAlignment(Qt::AlignCenter);
     ui->tableWidget->setItem(row, column, item);
     ui->tableWidget->setSpan(row, column, span, 1);
 
