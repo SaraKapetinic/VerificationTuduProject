@@ -14,7 +14,9 @@ TuduList::TuduList(QWidget *parent) :
 void TuduList::addTask(const QString &title, const QString desc, const int priority)
 {
     auto *item = new Task(title, desc, priority);
-    item->setName(title);
+
+    auto icon = item->fetchIcon(priority);
+    item->setIcon(icon);
 
     item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
     item->setDragEnabled(true);
