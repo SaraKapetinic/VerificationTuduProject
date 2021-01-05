@@ -92,8 +92,6 @@ int WeeklyView::getCurrentDayOfWeek() {
 
 void WeeklyView::loadFromJson(){
     // Load from file
-    // TODO move the code below (up to 75ish) to the weekly table class
-
     // TODO load the file location using a macro from task.cpp
     QString fileLocation = QString("%1/weekly_tasks.json")
             .arg(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));

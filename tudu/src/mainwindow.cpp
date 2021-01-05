@@ -15,6 +15,7 @@
 
 QList<QDate> currentWeek;
 QDate today = QDate::currentDate();
+WeeklyView* week;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -28,12 +29,11 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
     // Initialization class
-    WeeklyView *week = new WeeklyView(ui);
+    week = new WeeklyView(ui);
     week->execute();
 
     // Append to list so we can use it in cellDoubleClicked
     currentWeek.append(week->getCurrentWeek());
-
 
     auto size = new QSize(0,0);
     ui->tableWidget->setIconSize(*size);
@@ -110,10 +110,9 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
 void MainWindow::on_calendarMonths_activated(const QDate &date)
 {
 
-    WeeklyView* week = new WeeklyView(ui, date);
+    week = new WeeklyView(ui, date);
     week->execute();
 
     ui->tabWidget->setCurrentWidget(ui->tabWeekTest);
-
 
 }
