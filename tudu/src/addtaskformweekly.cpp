@@ -9,6 +9,7 @@ AddTaskFormWeekly::AddTaskFormWeekly(QWidget *parent, QTime time, QDate date, in
     QDialog(parent),
     ui(new Ui::AddTaskFormWeekly)
 {
+
     m_time = time;
     m_date = date;
     m_row = row;

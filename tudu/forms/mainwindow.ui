@@ -6,15 +6,31 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>942</width>
-    <height>602</height>
+    <width>1280</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>TUDU List</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #e1efe6;
+color: #160c28;</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_4">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item row="0" column="0">
      <widget class="QScrollArea" name="scrollArea">
       <property name="widgetResizable">
@@ -25,11 +41,23 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>922</width>
-         <height>521</height>
+         <width>1278</width>
+         <height>718</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabWidget">
           <property name="sizePolicy">
@@ -46,6 +74,18 @@
             <string>Month</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_3">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item row="0" column="0">
              <widget class="QCalendarWidget" name="calendarMonths">
               <property name="gridVisible">
@@ -60,6 +100,18 @@
             <string>Week</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_5">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item row="0" column="0">
              <widget class="QTableWidget" name="tableWidget">
               <property name="mouseTracking">
@@ -256,10 +308,28 @@
            <enum>QFrame::Raised</enum>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <property name="topMargin">
+              <number>20</number>
+             </property>
              <item>
               <widget class="QLabel" name="label">
+               <property name="styleSheet">
+                <string notr="true">font-size: 20px;</string>
+               </property>
                <property name="text">
                 <string>TUDU List</string>
                </property>
@@ -267,6 +337,11 @@
              </item>
              <item>
               <widget class="QPushButton" name="pushButton">
+               <property name="styleSheet">
+                <string notr="true">background-color: #160c28;
+color: #e1efe6;
+height: 20px;</string>
+               </property>
                <property name="text">
                 <string>Add Task</string>
                </property>
@@ -284,11 +359,23 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>158</width>
-                <height>448</height>
+                <width>250</width>
+                <height>659</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_2">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
                <item row="0" column="0">
                 <layout class="QVBoxLayout" name="verticalLayoutTUDU"/>
                </item>
@@ -305,37 +392,6 @@
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>942</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuMonths">
-    <property name="title">
-     <string>File</string>
-    </property>
-   </widget>
-   <widget class="QMenu" name="menuWeeks">
-    <property name="title">
-     <string>Edit</string>
-    </property>
-   </widget>
-   <addaction name="menuMonths"/>
-   <addaction name="menuWeeks"/>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

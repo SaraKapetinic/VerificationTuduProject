@@ -10,8 +10,10 @@ void Init::setDays(Ui::MainWindow* ui){
     int currentDayOfWeek = getCurrentDayOfWeek(ui);
 
     // Highlight current day header
-    QColor headerColor = (255);
+    QColor headerColor = QColor(22, 12, 40);
+    QColor textColor = QColor(225, 239, 230);
     ui->tableWidget->horizontalHeaderItem(currentDayOfWeek-1)->setBackground(headerColor);
+    ui->tableWidget->horizontalHeaderItem(currentDayOfWeek-1)->setForeground(textColor);
 
     int numOfDays = NUM_OF_WEEKDAYS - currentDayOfWeek;
 
@@ -49,7 +51,8 @@ void Init::setHeaders(Ui::MainWindow* ui){
     }
 
     ui->tableWidget->setVerticalHeaderLabels(m_verticalHeaders);
-    ui->tableWidget->verticalHeaderItem(getCurrentTimeRow(ui))->setBackground(QBrush(QColor("red")));
+    ui->tableWidget->verticalHeaderItem(getCurrentTimeRow(ui))->setBackground(QBrush(QColor(22, 12, 40)));
+    ui->tableWidget->verticalHeaderItem(getCurrentTimeRow(ui))->setForeground(QBrush(QColor(225, 239, 230)));
     ui->tableWidget->setCurrentCell(getCurrentTimeRow(ui), currentDayOfWeek-1);
 
 }
