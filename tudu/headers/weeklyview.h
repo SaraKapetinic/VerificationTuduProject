@@ -5,6 +5,10 @@
 #include <QWidget>
 #include <QDate>
 #include <QColor>
+#include <QStandardPaths>
+#include <QJsonDocument>
+#include <QFile>
+#include <QJsonObject>
 #include "ui_mainwindow.h"
 
 #define NUM_OF_WEEKDAYS (7)
@@ -16,14 +20,15 @@
 class WeeklyView
 {
 public:
-    WeeklyView();
-    WeeklyView(QDate date);
+    WeeklyView(Ui::MainWindow* ui);
+    WeeklyView(Ui::MainWindow* ui, QDate date);
 
-    void setDays(Ui::MainWindow* ui);
-    void setHeaders(Ui::MainWindow* ui);
-    void setDesign(Ui::MainWindow* ui);
+    void setDays();
+    void setHeaders();
+    void setDesign();
+    void loadFromJson();
 
-    void execute(Ui::MainWindow* ui);
+    void execute();
 
     QList<QDate> getCurrentWeek();
 
@@ -32,7 +37,7 @@ public:
     int getCurrentDayOfWeek();
 
 private:
-    QWidget m_ui;
+    Ui::MainWindow* m_ui;
     QStringList m_horizontalHeaders;
     QStringList m_verticalHeaders;
     QList<QDate> m_currentWeek;
