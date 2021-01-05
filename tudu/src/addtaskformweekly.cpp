@@ -4,7 +4,6 @@
 #include "headers/weeklyview.h"
 #include "headers/task.h"
 
-
 AddTaskFormWeekly::AddTaskFormWeekly(QWidget *parent, QTime time, QDate date, int row, int column) :
     QDialog(parent),
     ui(new Ui::AddTaskFormWeekly)
