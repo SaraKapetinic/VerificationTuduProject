@@ -57,3 +57,16 @@ void AddTaskFormWeekly::on_pbSaveTask_clicked()
 void AddTaskFormWeekly::SetTaskTitle(QString TaskName){
     ui->taskTitle->setText(TaskName);
 }
+
+void AddTaskFormWeekly::SetTaskDescription(QString TaskDescription){
+    ui->taskDesc->insertPlainText(TaskDescription);
+}
+
+void AddTaskFormWeekly::SetTaskStartTime(QDateTime TaskStartTime){
+    ui->dateTimeStart->setDateTime(TaskStartTime);
+}
+
+void AddTaskFormWeekly::SetTaskEndTime(QDateTime TaskEndTime){
+    ui->dateTimeEnd->setDateTime(TaskEndTime);
+}
+

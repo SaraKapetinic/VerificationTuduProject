@@ -19,6 +19,9 @@ public:
     explicit AddTaskFormWeekly(QWidget *parent = 0, QTime time = QTime(0,0), QDate date = QDate(0,0,0), int row = 0, int column = 0);
     ~AddTaskFormWeekly();
     void SetTaskTitle(QString TaskName);
+    void SetTaskDescription(QString TaskDescription);
+    void SetTaskStartTime(QDateTime TaskStartTime);
+    void SetTaskEndTime(QDateTime TaskEndTime);
 
 private slots:
     void on_pbSaveTask_clicked();

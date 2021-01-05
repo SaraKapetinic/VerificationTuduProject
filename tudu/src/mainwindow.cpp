@@ -68,9 +68,20 @@ MainWindow::MainWindow(QWidget *parent) :
             auto currentTask = new Task(savedTasks.value(key));
             auto taskColumn = currentTask->getStartTime().date().dayOfWeek() - 1;
             auto task_row = currentTask->getStartTime().time().msecsSinceStartOfDay() / (1000 * 60 * 15);
+            auto task_row_span = currentTask->getEndTime().time().msecsSinceStartOfDay() / (1000 * 60 * 15);
+            auto span = task_row_span - task_row;
 
             // TODO send a task object to the cell in our table
-            model->setData(model->index(task_row, taskColumn),currentTask->getName());
+            auto item = new QTableWidgetItem();
+            item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+            item->setData(NAME_ROLE, QVariant::fromValue<QString>(currentTask->getName()));
+            item->setData(ENDTIME_ROLE, QVariant::fromValue<QDateTime>(currentTask->getEndTime()));
+            item->setData(DESCRIPTION_ROLE, QVariant::fromValue<QString>(currentTask->getDescription()));
+            item->setText(currentTask->getName());
+            ui->tableWidget->setItem(task_row, taskColumn, item);
+            ui->tableWidget->setSpan(task_row, taskColumn, span, 1);
+
+
         }
     }else{
         std::cerr << "No tasks in file" << std::endl;
@@ -111,6 +122,8 @@ void MainWindow::recieveFromTask(Task* task, int row, int column, int span){
 //    QTableWidgetItem* item = ui->tableWidget->item(row, column);
     item->setFlags(item->flags() ^ Qt::ItemIsEditable);
     item->setData(NAME_ROLE, QVariant::fromValue<QString>(task->getName()));
+    item->setData(ENDTIME_ROLE, QVariant::fromValue<QDateTime>(task->getEndTime()));
+    item->setData(DESCRIPTION_ROLE, QVariant::fromValue<QString>(task->getDescription()));
     item->setText(task->getName());
 
     // Set color of scheduled task
@@ -134,11 +147,13 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
     if (item){
         std::cout << item->data(NAME_ROLE).toString().toStdString() << std::endl;
         mDialog->SetTaskTitle(item->data(NAME_ROLE).toString());
+        mDialog->SetTaskEndTime(item->data(ENDTIME_ROLE).toDateTime());
+        mDialog->SetTaskDescription(item->data(DESCRIPTION_ROLE).toString());
     }
 
     // Send data from form to main window
     connect(mDialog,SIGNAL(sendToCalendar(Task*, int, int, int)),
-            this, SLOT(recieveFromTask(Task*, int, int, int)));
+            this, SLOT(recieveFromTask(Task*, int, int, int)));    
     mDialog->setModal(true);
     mDialog->exec();
 
