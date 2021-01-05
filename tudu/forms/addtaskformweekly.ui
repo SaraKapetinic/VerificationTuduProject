@@ -83,6 +83,11 @@
        </item>
        <item row="10" column="0">
         <widget class="QPlainTextEdit" name="taskDesc">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
          <property name="placeholderText">
           <string>Add description</string>
          </property>

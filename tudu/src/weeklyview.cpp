@@ -146,6 +146,10 @@ void WeeklyView::loadFromJson(){
                 QColor taskColor = QColor(239, 138, 23);
                 item->setBackground(taskColor);
                 item->setTextAlignment(Qt::AlignCenter);
+                QFont font;
+                font.setFamily("Ubuntu");
+                font.setPointSize(12);
+                item->setFont(font);
                 m_ui->tableWidget->setItem(taskRow, taskColumn, item);
                 m_ui->tableWidget->setSpan(taskRow, taskColumn, span+2, 1);
             }

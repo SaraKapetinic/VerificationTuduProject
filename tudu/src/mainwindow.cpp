@@ -76,6 +76,10 @@ void MainWindow::recieveFromTask(Task* task, int row, int column, int span){
     QColor taskColor = QColor(239, 138, 23);
     item->setBackground(taskColor);
     item->setTextAlignment(Qt::AlignCenter);
+    QFont font;
+    font.setFamily("Ubuntu");
+    font.setPointSize(12);
+    item->setFont(font);
     ui->tableWidget->setItem(row, column, item);
     ui->tableWidget->setSpan(row, column, span, 1);
 
