@@ -227,3 +227,20 @@ void MainWindow::on_calendarMonths_activated(const QDate &date)
 
 
 }
+
+void MainWindow::on_listView_doubleClicked(const QModelIndex &index)
+{
+    AddTaskFormTudu *tDialog = new AddTaskFormTudu(this);
+    tDialog->setWindowTitle("Update Task");
+
+    int row = index.row();
+
+
+
+
+  //  connect(tDialog, SIGNAL(sendToTuduList(QString, QString, int)), this, SLOT(recieveInTuduList(QString, QString, int)));
+
+
+    tDialog->setModal(true);
+    tDialog->exec();
+}

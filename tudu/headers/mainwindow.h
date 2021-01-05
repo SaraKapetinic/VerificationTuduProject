@@ -28,6 +28,8 @@ private slots:
 
   void on_calendarMonths_activated(const QDate &date);
 
+  void on_listView_doubleClicked(const QModelIndex &index);
+
 private:
     Ui::MainWindow *ui;
 };
