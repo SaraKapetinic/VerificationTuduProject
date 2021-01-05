@@ -3,7 +3,8 @@
 
 #include <QMainWindow>
 
-#include "task.h"
+#include "headers/task.h"
+#include "headers/weeklyview.h"
 
 namespace Ui {
 class MainWindow;

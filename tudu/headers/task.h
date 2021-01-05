@@ -73,6 +73,11 @@ public:
 
     QIcon fetchIcon(int priority);
 
+    qint32 getTaskColumn() const;
+    qint32 getTaskRow() const;
+    qint32 getTaskSpan() const;
+
+
 protected:
     QString name;
     QString description;

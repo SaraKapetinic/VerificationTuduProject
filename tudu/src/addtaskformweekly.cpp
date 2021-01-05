@@ -40,6 +40,15 @@ void AddTaskFormWeekly::on_pbSaveTask_clicked()
     int end = ui->dateTimeEnd->time().hour() * 60 + ui->dateTimeEnd->time().minute();
     int span = (end - start)/15;
 
+    if((end-start) % 15 == 0){
+        span = span + 1;
+    }else{
+        span = span+2;
+    }
+
+
+    std::cout << "start: " << start << std::endl << "end: " << end  << std::endl << "span: " << span << std::endl;
+
 
     // Create new task from values inputted
     Task* task = new Task(taskTitle, taskDesc, ui->dateTimeStart->dateTime(), ui->dateTimeEnd->dateTime(), DURATION_DEFAULT, PRIORITY_DEFAULT, 1);

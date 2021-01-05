@@ -5,7 +5,12 @@
 #include <QWidget>
 #include <QDate>
 #include <QColor>
+#include <QStandardPaths>
+#include <QJsonDocument>
+#include <QFile>
+#include <QJsonObject>
 #include "ui_mainwindow.h"
+#include "headers/task.h"
 
 #define NUM_OF_WEEKDAYS (7)
 #define HOURS_IN_DAY (24)
@@ -16,27 +21,32 @@
 class WeeklyView
 {
 public:
-    WeeklyView();
-    WeeklyView(QDate date);
+    WeeklyView(Ui::MainWindow* ui);
+    WeeklyView(Ui::MainWindow* ui, QDate date);
 
-    void setDays(Ui::MainWindow* ui);
-    void setHeaders(Ui::MainWindow* ui);
-    void setDesign(Ui::MainWindow* ui);
+    void clearView();
+    void setDays();
+    void setHeaders();
+    void setDesign();
+    void loadFromJson();
 
-    void execute(Ui::MainWindow* ui);
+    void execute();
 
-    QList<QDate> getCurrentWeek();
+    QList<QDate> getCurrentWeek() const;
 
-    int getCurrentTimeRow();
+    int getCurrentTimeRow() const;
 
-    int getCurrentDayOfWeek();
+    int getCurrentDayOfWeek() const;
 
 private:
-    QWidget m_ui;
+    Ui::MainWindow* m_ui;
     QStringList m_horizontalHeaders;
     QStringList m_verticalHeaders;
     QList<QDate> m_currentWeek;
     QDate m_selectedDate;
+    QList<Task> m_weeklyTasks;
+    QColor m_headerPrimaryColor = QColor(225, 239, 230);
+    QColor m_headerSecondaryColor = QColor(22, 12, 40);
 };
 
 #endif // WEEKLYVIEW_H

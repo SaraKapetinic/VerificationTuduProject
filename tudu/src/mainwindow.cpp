@@ -16,6 +16,7 @@
 
 QList<QDate> currentWeek;
 QDate today = QDate::currentDate();
+WeeklyView* week;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -29,67 +30,8 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
     // Initialization class
-    WeeklyView *week = new WeeklyView();
-    week->execute(ui);
-
-    // Append to list so we can use it in cellDoubleClicked
-    currentWeek.append(week->getCurrentWeek());
-
-
-    // Load from file
-    // TODO move the code below (up to 75ish) to the weekly table class
-
-    // TODO load the file location using a macro from task.cpp
-    QString fileLocation = QString("%1/weekly_tasks.json")
-            .arg(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
-
-    // Open file for reading
-    QFile file(fileLocation);
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
-
-    // Read JSON
-    QJsonDocument jsonDocument = QJsonDocument::fromJson(file.readAll());
-    file.close();
-    // Get array so we can see number of tasks in file
-    auto savedTasks = jsonDocument.object();
-
-    // Put tasks from file to Weekly table
-    if(savedTasks.size() != 0){
-        auto model = ui->tableWidget->model();
-        foreach(const QString& key, savedTasks.keys()){
-            // TODO add a check to see if the task is in the current week
-            // if (isCurrentWeem(key)) or something like that
-
-            auto currentTask = new Task(savedTasks.value(key));
-            auto taskColumn = currentTask->getStartTime().date().dayOfWeek() - 1;
-            auto task_row = currentTask->getStartTime().time().msecsSinceStartOfDay() / (1000 * 60 * 15);
-            auto task_row_span = currentTask->getEndTime().time().msecsSinceStartOfDay() / (1000 * 60 * 15);
-            auto span = task_row_span - task_row;
-
-            // TODO send a task object to the cell in our table
-            auto item = new QTableWidgetItem();
-            item->setFlags(item->flags() ^ Qt::ItemIsEditable);
-            item->setData(NAME_ROLE, QVariant::fromValue<QString>(currentTask->getName()));
-            item->setData(ENDTIME_ROLE, QVariant::fromValue<QDateTime>(currentTask->getEndTime()));
-            item->setData(DESCRIPTION_ROLE, QVariant::fromValue<QString>(currentTask->getDescription()));
-            item->setData(CREATIONTIME_ROLE,QVariant::fromValue<QString>(currentTask->getCreationTimeString()));
-            item->setText(currentTask->getName());
-            ui->tableWidget->setItem(task_row, taskColumn, item);
-            ui->tableWidget->setSpan(task_row, taskColumn, span, 1);
-
-            QStringList splitDate = ui->tableWidget->horizontalHeaderItem(taskColumn)->text().split("\n");
-
-            QDate dateHeader = QDate::fromString(splitDate[1], "dd.MM.yyyy.");
-            QDateTime dateTask = QDateTime::fromString(key, "dd.MM.yyyy.hh:mm:ms");
-
-            if(dateHeader == dateTask.date()){
-                model->setData(model->index(task_row, taskColumn),currentTask->getName());
-            }
-
-        }
-    }else{
-        std::cerr << "No tasks in file" << std::endl;
-    }
+    week = new WeeklyView(ui);
+    week->execute();
 
     auto size = new QSize(0,0);
     ui->tableWidget->setIconSize(*size);
@@ -157,8 +99,13 @@ void MainWindow::recieveFromTask(Task* task, int row, int column, int span){
     item->setText(task->getName());
 
     // Set color of scheduled task
-    QColor taskColor = QColor(0, 204, 204);
+    QColor taskColor = QColor(239, 138, 23);
     item->setBackground(taskColor);
+    item->setTextAlignment(Qt::AlignCenter);
+    QFont font;
+    font.setFamily("Ubuntu");
+    font.setPointSize(12);
+    item->setFont(font);
     ui->tableWidget->setItem(row, column, item);
     ui->tableWidget->setSpan(row, column, span, 1);
 
@@ -168,7 +115,7 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
 {
 
     QTime time = QTime::fromString(ui->tableWidget->verticalHeaderItem(row)->text(), "hh:mm");
-    QDate date = currentWeek[column];
+    QDate date = week->getCurrentWeek().at(column);
 
     AddTaskFormWeekly *mDialog = new AddTaskFormWeekly(this, time, date, row, column);
     mDialog->setWindowTitle("Add New Task");
@@ -219,12 +166,11 @@ void MainWindow::recieveDeleteFromTask(int row, int column){
 
 void MainWindow::on_calendarMonths_activated(const QDate &date)
 {
-
-    WeeklyView* week = new WeeklyView(date);
-    week->execute(ui);
+//    week->saveTasksToJson();
+    week = new WeeklyView(ui, date);
+    week->execute();
 
     ui->tabWidget->setCurrentWidget(ui->tabWeekTest);
-
 
 }
 
