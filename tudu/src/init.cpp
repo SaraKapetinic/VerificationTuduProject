@@ -13,7 +13,7 @@ void Init::setDays(Ui::MainWindow* ui, QDate currentDate){
     QColor textColor = QColor(225, 239, 230);
     for (int i=0; i<7; i++) {
         ui->tableWidget->horizontalHeaderItem(i)->setBackground(textColor);
-        ui->tableWidget->horizontalHeaderItem(currentDayOfWeek-1)->setForeground(headerColor);
+        ui->tableWidget->horizontalHeaderItem(i)->setForeground(headerColor);
     }
     ui->tableWidget->horizontalHeaderItem(currentDayOfWeek-1)->setBackground(headerColor);
     ui->tableWidget->horizontalHeaderItem(currentDayOfWeek-1)->setForeground(textColor);
