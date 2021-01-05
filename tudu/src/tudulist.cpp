@@ -26,6 +26,7 @@ void TuduList::addTask(const QString &title, const QString desc, const int prior
     item->setData(QVariant::fromValue<int>(priority), PRIORITY_DEFAULT);
     item->setData(QVariant::fromValue<QString>(item->getCreationTimeString()),
                   CREATIONTIME_ROLE);
+
     item->setIcon(icon);
 
     static_cast<QStandardItemModel *>(model())->appendRow(item);

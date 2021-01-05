@@ -12,6 +12,7 @@
 #include <QJsonArray>
 #include <QVariant>
 #include <QDir>
+#include <headers/mainwindow.h>
 
 QList<QDate> currentWeek;
 
@@ -79,10 +80,38 @@ MainWindow::MainWindow(QWidget *parent) :
     auto size = new QSize(0,0);
     ui->tableWidget->setIconSize(*size);
 
+    reciveTuduFromJson("tuduList_tasks.json");
+
 }
 
 void MainWindow::recieveInTuduList(QString title, QString desc, int priority){
     ui->scrollAreaWidgetContents_2->findChildren<TuduList*>()[0]->addTask(title, desc, priority);
+}
+void MainWindow::reciveTuduFromJson(QString location){
+
+    QString path = "%1/";
+    path+=location;
+
+    QString fileLocation = path.arg(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
+
+    QFile file(fileLocation);
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(file.readAll());
+//    file.close();
+
+    auto savedTasks = jsonDocument.object();
+
+    if(savedTasks.size() != 0){
+        auto model = ui->scrollAreaWidgetContents_2->findChildren<TuduList*>()[0]->model();
+        foreach(const QString& key, savedTasks.keys()){
+            auto currentTask = new Task(savedTasks.value(key));
+            ui->scrollAreaWidgetContents_2->findChildren<TuduList*>()[0]->addTask(currentTask->getName(),currentTask->getDescription(),currentTask->getPriority());
+        }
+    }else{
+        std::cerr << "No tasks in file" << std::endl;
+    }
+    file.close();
 }
 
 void MainWindow::on_addTaskButtonClicked()
