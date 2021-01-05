@@ -11,13 +11,13 @@
 #define START_END_TIME_FORMAT "dd.MM.yyyy. hh:mm"
 #define CREATION_TIME_FORMAT "dd.MM.yyyy.hh:mm:ms"
 
-#define NAME_ROLE (1)
-#define DESCRIPTION_ROLE (2)
-#define STARTTIME_ROLE (3)
-#define ENDTIME_ROLE (4)
-#define DURATION_ROLE (5)
-#define PRIORITY_ROLE (6)
-#define CREATIONTIME_ROLE (7)
+#define NAME_ROLE (Qt::UserRole + 1)
+#define DESCRIPTION_ROLE (Qt::UserRole + 2)
+#define STARTTIME_ROLE (Qt::UserRole + 3)
+#define ENDTIME_ROLE (Qt::UserRole + 4)
+#define DURATION_ROLE (Qt::UserRole + 5)
+#define PRIORITY_ROLE (Qt::UserRole + 6)
+#define CREATIONTIME_ROLE (Qt::UserRole + 7)
 
 #include <QStandardItem>
 #include <QDateTime>

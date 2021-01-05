@@ -5,6 +5,7 @@
 #include <iostream>
 #include <QDate>
 #include "ui_mainwindow.h"
+#include "task.h"
 
 namespace Ui {
 class AddTaskFormWeekly;
@@ -17,12 +18,13 @@ class AddTaskFormWeekly : public QDialog
 public:
     explicit AddTaskFormWeekly(QWidget *parent = 0, QTime time = QTime(0,0), QDate date = QDate(0,0,0), int row = 0, int column = 0);
     ~AddTaskFormWeekly();
+    void SetTaskTitle(QString TaskName);
 
 private slots:
     void on_pbSaveTask_clicked();
 
 signals:
-    void sendToCalendar(QString taskTitle, int row, int column, int span);
+    void sendToCalendar(Task* task, int row, int column, int span);
 
 private:
     Ui::AddTaskFormWeekly *ui;

@@ -20,11 +20,11 @@ void TuduList::addTask(const QString &title, const QString desc, const int prior
     item->setDragEnabled(true);
 
     // set the items data to apropriate values
-    item->setData(QVariant::fromValue<QString>(title), Qt::UserRole + NAME_ROLE);
-    item->setData(QVariant::fromValue<QString>(desc), Qt::UserRole + DESCRIPTION_ROLE);
-    item->setData(QVariant::fromValue<int>(priority), Qt::UserRole + PRIORITY_DEFAULT);
+    item->setData(QVariant::fromValue<QString>(title), NAME_ROLE);
+    item->setData(QVariant::fromValue<QString>(desc), DESCRIPTION_ROLE);
+    item->setData(QVariant::fromValue<int>(priority), PRIORITY_DEFAULT);
     item->setData(QVariant::fromValue<QString>(item->getCreationTimeString()),
-                  Qt::UserRole + CREATIONTIME_ROLE);
+                  CREATIONTIME_ROLE);
 
     static_cast<QStandardItemModel *>(model())->appendRow(item);
     scrollToBottom();

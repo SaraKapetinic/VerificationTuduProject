@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "task.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -17,7 +19,7 @@ public:
 
 public slots:
   void on_addTaskButtonClicked();
-  void recieveFromTask(QString taskTitle, int row, int column, int span);
+  void recieveFromTask(Task* task, int row, int column, int span);
   void recieveInTuduList(QString title, QString desc, int priority);
 
 private slots:

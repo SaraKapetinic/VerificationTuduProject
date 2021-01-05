@@ -105,19 +105,24 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::recieveFromTask(QString text, int row, int column, int span){
+void MainWindow::recieveFromTask(Task* task, int row, int column, int span){
 
     // Show taskTitle in daily view
-    auto model = ui->tableWidget->model();
-    model->setData(model->index(row, column), text);
+//    auto model = ui->tableWidget->model();
+//    model->setData(model->index(row, column), task->getName());
+
+    auto item = new QTableWidgetItem();
 
     // Make current cell uneditable
-    QTableWidgetItem* item = ui->tableWidget->item(row, column);
+//    QTableWidgetItem* item = ui->tableWidget->item(row, column);
     item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+    item->setData(NAME_ROLE, QVariant::fromValue<QString>(task->getName()));
+    item->setText(task->getName());
 
     // Set color of scheduled task
     QColor taskColor = QColor(0, 204, 204);
     item->setBackground(taskColor);
+    ui->tableWidget->setItem(row, column, item);
     ui->tableWidget->setSpan(row, column, span, 1);
 
 }
@@ -131,8 +136,15 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
     AddTaskFormWeekly *mDialog = new AddTaskFormWeekly(this, time, date, row, column);
     mDialog->setWindowTitle("Add New Task");
 
+    auto item = ui->tableWidget->item(row, column);
+    if (item){
+        std::cout << item->data(NAME_ROLE).toString().toStdString() << std::endl;
+        mDialog->SetTaskTitle(item->data(NAME_ROLE).toString());
+    }
+
     // Send data from form to main window
-    connect(mDialog, SIGNAL(sendToCalendar(QString, int, int, int)), this, SLOT(recieveFromTask(QString, int, int, int)));
+    connect(mDialog,SIGNAL(sendToCalendar(Task*, int, int, int)),
+            this, SLOT(recieveFromTask(Task*, int, int, int)));
     mDialog->setModal(true);
     mDialog->exec();
 
