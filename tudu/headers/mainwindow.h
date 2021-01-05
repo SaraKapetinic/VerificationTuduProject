@@ -21,7 +21,7 @@ public slots:
   void on_addTaskButtonClicked();
   void recieveFromTask(Task* task, int row, int column, int span);
   void recieveInTuduList(QString title, QString desc, int priority);
-  void reciveTuduFromJson(QString location);
+  void receiveTuduFromJson(QString location);
 private slots:
   void on_tableWidget_cellDoubleClicked(int row, int column);
 

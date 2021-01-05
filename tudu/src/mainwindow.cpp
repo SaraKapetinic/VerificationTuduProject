@@ -80,14 +80,14 @@ MainWindow::MainWindow(QWidget *parent) :
     auto size = new QSize(0,0);
     ui->tableWidget->setIconSize(*size);
 
-    reciveTuduFromJson("tuduList_tasks.json");
+    receiveTuduFromJson("tuduList_tasks.json");
 
 }
 
 void MainWindow::recieveInTuduList(QString title, QString desc, int priority){
     ui->scrollAreaWidgetContents_2->findChildren<TuduList*>()[0]->addTask(title, desc, priority);
 }
-void MainWindow::reciveTuduFromJson(QString location){
+void MainWindow::receiveTuduFromJson(QString location){
 
     QString path = "%1/";
     path+=location;
@@ -103,7 +103,6 @@ void MainWindow::reciveTuduFromJson(QString location){
     auto savedTasks = jsonDocument.object();
 
     if(savedTasks.size() != 0){
-        auto model = ui->scrollAreaWidgetContents_2->findChildren<TuduList*>()[0]->model();
         foreach(const QString& key, savedTasks.keys()){
             auto currentTask = new Task(savedTasks.value(key));
             ui->scrollAreaWidgetContents_2->findChildren<TuduList*>()[0]->addTask(currentTask->getName(),currentTask->getDescription(),currentTask->getPriority());
