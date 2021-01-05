@@ -62,12 +62,19 @@ MainWindow::MainWindow(QWidget *parent) :
         foreach(const QString& key, savedTasks.keys()){
             // TODO add a check to see if the task is in the current week
             // if (isCurrentWeem(key)) or something like that
+
             auto currentTask = new Task(savedTasks.value(key));
             auto taskColumn = currentTask->getStartTime().date().dayOfWeek() - 1;
             auto task_row = currentTask->getStartTime().time().msecsSinceStartOfDay() / (1000 * 60 * 15);
 
-            // TODO send a task object to the cell in our table
-            model->setData(model->index(task_row, taskColumn),currentTask->getName());
+            QStringList splitDate = ui->tableWidget->horizontalHeaderItem(taskColumn)->text().split("\n");
+
+            QDate dateHeader = QDate::fromString(splitDate[1], "dd.MM.yyyy.");
+            QDateTime dateTask = QDateTime::fromString(key, "dd.MM.yyyy.hh:mm:ms");
+
+            if(dateHeader == dateTask.date()){
+                model->setData(model->index(task_row, taskColumn),currentTask->getName());
+            }
         }
     }else{
         std::cerr << "No tasks in file" << std::endl;
