@@ -80,17 +80,16 @@ MainWindow::MainWindow(QWidget *parent) :
     auto size = new QSize(0,0);
     ui->tableWidget->setIconSize(*size);
 
-    receiveTuduFromJson("tuduList_tasks.json");
+    loadTuduFromJson();
 
 }
 
 void MainWindow::recieveInTuduList(QString title, QString desc, int priority){
     ui->scrollAreaWidgetContents_2->findChildren<TuduList*>()[0]->addTask(title, desc, priority);
 }
-void MainWindow::receiveTuduFromJson(QString location){
+void MainWindow::loadTuduFromJson(){
 
-    QString path = "%1/";
-    path+=location;
+    QString path = "%1/tuduList_tasks.json";
 
     QString fileLocation = path.arg(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
 
