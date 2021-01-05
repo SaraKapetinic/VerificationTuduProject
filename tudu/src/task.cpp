@@ -177,3 +177,17 @@ void Task::save(QString fileName) {
     file.write(final_doc.toJson());
     file.close();
 }
+
+QPixmap Task::selectIcon(int ppriority)
+{
+    if(ppriority == 0){
+        auto pix = QPixmap(":/resources/resources/png/red.png");
+        return pix;
+    }else if(ppriority == 1){
+        auto pix = QPixmap(":/resources/resources/png/yellow.png");
+        return pix;
+    }else{
+        auto pix = QPixmap(":/resources/resources/png/green.png");
+        return pix;
+    }
+}

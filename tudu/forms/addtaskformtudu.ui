@@ -110,6 +110,9 @@ height: 35px;</string>
      <property name="editable">
       <bool>false</bool>
      </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
      <item>
       <property name="text">
        <string>High</string>

@@ -60,6 +60,8 @@ public:
 
     void save(QString fileName);
 
+    QPixmap selectIcon(int priority);
+
 protected:
     QString name;
     QString description;
