@@ -20,6 +20,7 @@ public:
 public slots:
   void on_addTaskButtonClicked();
   void recieveFromTask(Task* task, int row, int column, int span);
+  void recieveDeleteFromTask(int row, int column);
   void recieveInTuduList(QString title, QString desc, int priority);
 
 private slots:
