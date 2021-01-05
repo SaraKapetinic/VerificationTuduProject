@@ -77,6 +77,7 @@ MainWindow::MainWindow(QWidget *parent) :
             item->setData(NAME_ROLE, QVariant::fromValue<QString>(currentTask->getName()));
             item->setData(ENDTIME_ROLE, QVariant::fromValue<QDateTime>(currentTask->getEndTime()));
             item->setData(DESCRIPTION_ROLE, QVariant::fromValue<QString>(currentTask->getDescription()));
+            item->setData(CREATIONTIME_ROLE,QVariant::fromValue<QString>(currentTask->getCreationTimeString()));
             item->setText(currentTask->getName());
             ui->tableWidget->setItem(task_row, taskColumn, item);
             ui->tableWidget->setSpan(task_row, taskColumn, span, 1);
@@ -124,6 +125,7 @@ void MainWindow::recieveFromTask(Task* task, int row, int column, int span){
     item->setData(NAME_ROLE, QVariant::fromValue<QString>(task->getName()));
     item->setData(ENDTIME_ROLE, QVariant::fromValue<QDateTime>(task->getEndTime()));
     item->setData(DESCRIPTION_ROLE, QVariant::fromValue<QString>(task->getDescription()));
+    item->setData(CREATIONTIME_ROLE,QVariant::fromValue<QString>(task->getCreationTimeString()));
     item->setText(task->getName());
 
     // Set color of scheduled task
@@ -144,8 +146,7 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
     mDialog->setWindowTitle("Add New Task");
 
     auto item = ui->tableWidget->item(row, column);
-    if (item){
-        std::cout << item->data(NAME_ROLE).toString().toStdString() << std::endl;
+    if (item){        
         mDialog->SetTaskTitle(item->data(NAME_ROLE).toString());
         mDialog->SetTaskEndTime(item->data(ENDTIME_ROLE).toDateTime());
         mDialog->SetTaskDescription(item->data(DESCRIPTION_ROLE).toString());
@@ -153,7 +154,7 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
 
     // Send data from form to main window
     connect(mDialog,SIGNAL(sendToCalendar(Task*, int, int, int)),
-            this, SLOT(recieveFromTask(Task*, int, int, int)));    
+            this, SLOT(recieveFromTask(Task*, int, int, int)));
     mDialog->setModal(true);
     mDialog->exec();
 
