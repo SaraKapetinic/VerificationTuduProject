@@ -26,8 +26,11 @@ public:
 private slots:
     void on_pbSaveTask_clicked();
 
+    void on_pbDeleteTask_clicked();
+
 signals:
     void sendToCalendar(Task* task, int row, int column, int span);
+    void sendDeleteToCalendar(int row, int column);
 
 private:
     Ui::AddTaskFormWeekly *ui;

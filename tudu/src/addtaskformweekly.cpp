@@ -69,3 +69,9 @@ void AddTaskFormWeekly::SetTaskEndTime(QDateTime TaskEndTime){
     ui->dateTimeEnd->setDateTime(TaskEndTime);
 }
 
+
+void AddTaskFormWeekly::on_pbDeleteTask_clicked()
+{
+    emit sendDeleteToCalendar(m_row, m_column);
+    close();
+}
