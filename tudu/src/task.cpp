@@ -8,7 +8,10 @@
 
 #define START_END_TIME_FORMAT "dd.MM.yyyy. hh:mm"
 #define CREATION_TIME_FORMAT "dd.MM.yyyy.hh:mm:ms"
-
+#define HIGH_PRIORITY "high_priority.png"
+#define MID_PRIORITY "mid_priority.png"
+#define LOW_PRIORITY "low_priority.png"
+#define RESOURCES ":/resources/resources/png/"
 
 Task::Task(
         QString Tname,
@@ -178,17 +181,23 @@ void Task::save(QString fileName) {
     file.close();
 }
 
-QPixmap Task::selectIcon(int ppriority)
+QIcon Task::fetchIcon(int priority)
 {
+    QIcon icon;
     QPixmap pix;
+    QString path = RESOURCES;
 
-    if(ppriority == 0){
-        pix = QPixmap(":/resources/resources/png/red.png");
-    }else if(ppriority == 1){
-        pix = QPixmap(":/resources/resources/png/yellow.png");
+    if(priority == 0){
+        path += HIGH_PRIORITY;
+        pix = QPixmap(path);
+    }else if(priority == 1){
+        path += MID_PRIORITY;
+        pix = QPixmap(path);
     }else{
-        pix = QPixmap(":/resources/resources/png/green.png");
+        path += LOW_PRIORITY;
+        pix = QPixmap(path);
     }
 
-    return pix;
+    icon = QIcon(pix);
+    return icon;
 }

@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/resources">
-        <file>resources/png/green.png</file>
-        <file>resources/png/red.png</file>
-        <file>resources/png/yellow.png</file>
+        <file>resources/png/low_priority.png</file>
+        <file>resources/png/high_priority.png</file>
+        <file>resources/png/mid_priority.png</file>
     </qresource>
 </RCC>

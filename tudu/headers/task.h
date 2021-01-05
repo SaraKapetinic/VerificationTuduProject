@@ -60,7 +60,7 @@ public:
 
     void save(QString fileName);
 
-    QPixmap selectIcon(int priority);
+    QIcon fetchIcon(int priority);
 
 protected:
     QString name;

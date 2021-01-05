@@ -131,7 +131,7 @@ height: 35px;</string>
       </property>
       <property name="icon">
        <iconset resource="../resources.qrc">
-        <normaloff>:/resources/resources/png/red.png</normaloff>:/resources/resources/png/red.png</iconset>
+        <normaloff>:/resources/resources/png/high_priority.png</normaloff>:/resources/resources/png/high_priority.png</iconset>
       </property>
      </item>
      <item>
@@ -140,7 +140,7 @@ height: 35px;</string>
       </property>
       <property name="icon">
        <iconset resource="../resources.qrc">
-        <normaloff>:/resources/resources/png/yellow.png</normaloff>:/resources/resources/png/yellow.png</iconset>
+        <normaloff>:/resources/resources/png/mid_priority.png</normaloff>:/resources/resources/png/mid_priority.png</iconset>
       </property>
      </item>
      <item>
@@ -149,7 +149,7 @@ height: 35px;</string>
       </property>
       <property name="icon">
        <iconset resource="../resources.qrc">
-        <normaloff>:/resources/resources/png/green.png</normaloff>:/resources/resources/png/green.png</iconset>
+        <normaloff>:/resources/resources/png/low_priority.png</normaloff>:/resources/resources/png/low_priority.png</iconset>
       </property>
      </item>
     </widget>
