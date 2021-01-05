@@ -25,6 +25,8 @@ public slots:
 private slots:
   void on_tableWidget_cellDoubleClicked(int row, int column);
 
+  void on_calendarMonths_activated(const QDate &date);
+
 private:
     Ui::MainWindow *ui;
 };

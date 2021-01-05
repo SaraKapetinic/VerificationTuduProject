@@ -3,7 +3,7 @@
 #include "headers/addtaskformweekly.h"
 #include "headers/tudulist.h"
 #include "headers/addtaskformtudu.h"
-#include "headers/init.h"
+#include "headers/weeklyview.h"
 #include <QTextEdit>
 #include <QStandardPaths>
 #include <QFile>
@@ -14,6 +14,7 @@
 #include <QDir>
 
 QList<QDate> currentWeek;
+QDate today = QDate::currentDate();
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -27,19 +28,11 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
     // Initialization class
-    Init *init = new Init();
-
-    // Methods to set up mainwindow
-    init->setDays(ui);
-    init->setHeaders(ui);
-
-    // Make table fill entire widget
-    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    WeeklyView *week = new WeeklyView();
+    week->execute(ui);
 
     // Append to list so we can use it in cellDoubleClicked
-    for(int i=0;i<NUM_OF_WEEKDAYS;i++){
-        currentWeek.append(init->getCurrentWeek()[i]);
-    }
+    currentWeek.append(week->getCurrentWeek());
 
 
     // Load from file
@@ -65,6 +58,7 @@ MainWindow::MainWindow(QWidget *parent) :
         foreach(const QString& key, savedTasks.keys()){
             // TODO add a check to see if the task is in the current week
             // if (isCurrentWeem(key)) or something like that
+
             auto currentTask = new Task(savedTasks.value(key));
             auto taskColumn = currentTask->getStartTime().date().dayOfWeek() - 1;
             auto task_row = currentTask->getStartTime().time().msecsSinceStartOfDay() / (1000 * 60 * 15);
@@ -82,6 +76,14 @@ MainWindow::MainWindow(QWidget *parent) :
             ui->tableWidget->setItem(task_row, taskColumn, item);
             ui->tableWidget->setSpan(task_row, taskColumn, span, 1);
 
+            QStringList splitDate = ui->tableWidget->horizontalHeaderItem(taskColumn)->text().split("\n");
+
+            QDate dateHeader = QDate::fromString(splitDate[1], "dd.MM.yyyy.");
+            QDateTime dateTask = QDateTime::fromString(key, "dd.MM.yyyy.hh:mm:ms");
+
+            if(dateHeader == dateTask.date()){
+                model->setData(model->index(task_row, taskColumn),currentTask->getName());
+            }
 
         }
     }else{
@@ -160,3 +162,13 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
 
 }
 
+void MainWindow::on_calendarMonths_activated(const QDate &date)
+{
+
+    WeeklyView* week = new WeeklyView(date);
+    week->execute(ui);
+
+    ui->tabWidget->setCurrentWidget(ui->tabWeekTest);
+
+
+}

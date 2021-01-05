@@ -41,8 +41,8 @@ color: #160c28;</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>1278</width>
-         <height>718</height>
+         <width>922</width>
+         <height>519</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout">
@@ -127,13 +127,16 @@ color: #160c28;</string>
                <enum>QAbstractScrollArea::AdjustIgnored</enum>
               </property>
               <property name="dragEnabled">
-               <bool>true</bool>
+               <bool>false</bool>
+              </property>
+              <property name="dragDropOverwriteMode">
+               <bool>false</bool>
               </property>
               <property name="dragDropOverwriteMode">
                <bool>true</bool>
               </property>
               <property name="dragDropMode">
-               <enum>QAbstractItemView::DragDrop</enum>
+               <enum>QAbstractItemView::DropOnly</enum>
               </property>
               <property name="defaultDropAction">
                <enum>Qt::MoveAction</enum>
@@ -362,8 +365,8 @@ height: 20px;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>250</width>
-                <height>659</height>
+                <width>158</width>
+                <height>445</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_2">
