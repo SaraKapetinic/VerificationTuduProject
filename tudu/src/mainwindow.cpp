@@ -109,7 +109,7 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
 
 void MainWindow::on_calendarMonths_activated(const QDate &date)
 {
-
+//    week->saveTasksToJson();
     week = new WeeklyView(ui, date);
     week->execute();
 

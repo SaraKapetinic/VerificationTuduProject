@@ -8,20 +8,32 @@ WeeklyView::WeeklyView(Ui::MainWindow* ui)
     :m_ui(ui), m_selectedDate(QDate::currentDate())
 {}
 
+void WeeklyView::clearView() {
+    // Reset header colors
+    for (int i=0; i<7; i++) {
+            m_ui->tableWidget->horizontalHeaderItem(i)->setBackground(m_headerPrimaryColor);
+            m_ui->tableWidget->horizontalHeaderItem(i)->setForeground(m_headerSecondaryColor);
+    }
+
+    // Clear content of a weekly view
+    for (int i=0; i<NUM_OF_WEEKDAYS; i++) {
+        for (int j=0; j<HOURS_IN_DAY*(MINUTES_IN_HOUR/MINUTE_INCREMENTS); j++) {
+            auto item = new QTableWidgetItem();
+            item->setText("");
+            m_ui->tableWidget->setSpan(j, i, 1, 1);
+            m_ui->tableWidget->setItem(j, i, item);
+        }
+    }
+}
+
 void WeeklyView::setDays() {
 
     // Ordinal number of current day (Monday = 1; ... ; Sunday = 7)
     int currentDayOfWeek = getCurrentDayOfWeek();
 
     // Highlight current day header
-    QColor headerColor = QColor(22, 12, 40);
-    QColor textColor = QColor(225, 239, 230);
-    for (int i=0; i<7; i++) {
-            m_ui->tableWidget->horizontalHeaderItem(i)->setBackground(textColor);
-            m_ui->tableWidget->horizontalHeaderItem(i)->setForeground(headerColor);
-        }
-    m_ui->tableWidget->horizontalHeaderItem(currentDayOfWeek-1)->setBackground(headerColor);
-    m_ui->tableWidget->horizontalHeaderItem(currentDayOfWeek-1)->setForeground(textColor);
+    m_ui->tableWidget->horizontalHeaderItem(currentDayOfWeek-1)->setBackground(m_headerSecondaryColor);
+    m_ui->tableWidget->horizontalHeaderItem(currentDayOfWeek-1)->setForeground(m_headerPrimaryColor);
 
     // Number of days till the end of the week
     int numOfDays = NUM_OF_WEEKDAYS - currentDayOfWeek;
@@ -37,10 +49,10 @@ void WeeklyView::setDays() {
     // Fill list currentWeek and make header text
     // The m_currentWeek represents list of dates that will be shown in the weekly view
     for(int i = 0;i<NUM_OF_WEEKDAYS;i++){
-                m_currentWeek.append(m_selectedDate.addDays(daysAdded[i]));
-                m_horizontalHeaders
-                    .append(m_selectedDate.addDays(daysAdded[i]).toString("dddd\ndd.MM.yyyy."));
-        }
+        m_currentWeek.append(m_selectedDate.addDays(daysAdded[i]));
+        m_horizontalHeaders
+            .append(m_selectedDate.addDays(daysAdded[i]).toString("dddd\ndd.MM.yyyy."));
+    }
 
 }
 
@@ -57,7 +69,10 @@ void WeeklyView::setHeaders() {
     for (int i=0; i<HOURS_IN_DAY; i++) {
         for (int j=0; j<MINUTES_IN_HOUR; j+=MINUTE_INCREMENTS) {
             time = "";
-            time.sprintf("%02d:%02d", i, j);
+//            time.sprintf("%02d:%02d", i, j);
+            time = QString("%1:%2")
+                    .arg(i, 2, 10, QLatin1Char('0'))
+                    .arg(j, 2, 10, QLatin1Char('0'));
             m_verticalHeaders << time;
         }
     }
@@ -69,11 +84,11 @@ void WeeklyView::setHeaders() {
 
 }
 
-QList<QDate> WeeklyView::getCurrentWeek() {
+QList<QDate> WeeklyView::getCurrentWeek() const {
     return m_currentWeek;
 }
 
-int WeeklyView::getCurrentTimeRow() {
+int WeeklyView::getCurrentTimeRow() const {
 
     // Get current hour
     int currentHour = QTime::currentTime().hour();
@@ -86,7 +101,7 @@ int WeeklyView::getCurrentTimeRow() {
     return 4*currentHour + minuteQuadrants;
 }
 
-int WeeklyView::getCurrentDayOfWeek() {
+int WeeklyView::getCurrentDayOfWeek() const {
     return m_selectedDate.dayOfWeek();
 }
 
@@ -108,26 +123,17 @@ void WeeklyView::loadFromJson(){
 
     // Put tasks from file to Weekly table
     if(savedTasks.size() != 0){
-        auto model = m_ui->tableWidget->model();
         foreach(const QString& key, savedTasks.keys()){
-            // TODO add a check to see if the task is in the current week
-            // if (isCurrentWeem(key)) or something like that
+            QDate dateTask = QDateTime::fromString(key, CREATION_TIME_FORMAT).date();
 
-            auto currentTask = new Task(savedTasks.value(key));
-            auto taskColumn = currentTask->getStartTime().date().dayOfWeek() - 1;
-            auto task_row = currentTask->getStartTime().time().msecsSinceStartOfDay() / (1000 * 60 * 15);
-            auto task_row_span = currentTask->getEndTime().time().msecsSinceStartOfDay() / (1000 * 60 * 15);
-            auto span = task_row_span - task_row;
+            // Check if the task is in the current week
+            if (dateTask >= m_currentWeek.first() && dateTask <= m_currentWeek.last()) {
 
-            QStringList splitDate = m_ui->tableWidget->horizontalHeaderItem(taskColumn)->text().split("\n");
+                auto currentTask = new Task(savedTasks.value(key));
+                auto taskColumn = currentTask->getTaskColumn();
+                auto taskRow = currentTask->getTaskRow();
+                auto span = currentTask->getTaskSpan();
 
-            QDate dateHeader = QDate::fromString(splitDate[1], "dd.MM.yyyy.");
-            QDateTime dateTask = QDateTime::fromString(key, "dd.MM.yyyy.hh:mm:ms");
-
-            std::cout << dateHeader.toString().toStdString() << std::endl;
-            std::cout << dateTask.date().toString().toStdString() << std::endl;
-
-            if(dateHeader == dateTask.date()){
                 auto item = new QTableWidgetItem();
                 item->setFlags(item->flags() ^ Qt::ItemIsEditable);
                 item->setData(NAME_ROLE, QVariant::fromValue<QString>(currentTask->getName()));
@@ -135,23 +141,18 @@ void WeeklyView::loadFromJson(){
                 item->setData(DESCRIPTION_ROLE, QVariant::fromValue<QString>(currentTask->getDescription()));
                 item->setData(CREATIONTIME_ROLE,QVariant::fromValue<QString>(currentTask->getCreationTimeString()));
                 item->setText(currentTask->getName());
-                m_ui->tableWidget->setItem(task_row, taskColumn, item);
-                m_ui->tableWidget->setSpan(task_row, taskColumn, span, 1);
-            }else{
-                std::cout << "usao sam ovde" << std::endl;
-                auto item = new QTableWidgetItem();
-                item->setText("");
-                m_ui->tableWidget->setItem(task_row, taskColumn, item);
+                m_ui->tableWidget->setItem(taskRow, taskColumn, item);
+                m_ui->tableWidget->setSpan(taskRow, taskColumn, span, 1);
             }
-
         }
     }else{
-        std::cerr << "No tasks in file" << std::endl;
+        std::cerr << "No tasks in the file." << std::endl;
     }
 }
 
 void WeeklyView::execute() {
-    // Methods to set up mainwindow
+    // Methods to set up a mainwindow
+    clearView();
     setDays();
     setHeaders();
     loadFromJson();

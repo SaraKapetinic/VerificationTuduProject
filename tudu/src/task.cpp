@@ -204,3 +204,20 @@ QIcon Task::fetchIcon(int priority)
     icon = QIcon(pix);
     return icon;
 }
+
+qint32 Task::getTaskColumn() const
+{
+    return getStartTime().date().dayOfWeek() - 1;
+}
+
+qint32 Task::getTaskRow() const
+{
+    return getStartTime().time().msecsSinceStartOfDay() / (1000 * 60 * 15);
+}
+
+qint32 Task::getTaskSpan() const
+{
+    auto taskRowSpan = getEndTime().time().msecsSinceStartOfDay() / (1000 * 60 * 15);
+
+    return taskRowSpan - getTaskRow();
+}

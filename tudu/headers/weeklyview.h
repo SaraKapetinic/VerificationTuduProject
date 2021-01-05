@@ -10,6 +10,7 @@
 #include <QFile>
 #include <QJsonObject>
 #include "ui_mainwindow.h"
+#include "headers/task.h"
 
 #define NUM_OF_WEEKDAYS (7)
 #define HOURS_IN_DAY (24)
@@ -23,6 +24,7 @@ public:
     WeeklyView(Ui::MainWindow* ui);
     WeeklyView(Ui::MainWindow* ui, QDate date);
 
+    void clearView();
     void setDays();
     void setHeaders();
     void setDesign();
@@ -30,11 +32,11 @@ public:
 
     void execute();
 
-    QList<QDate> getCurrentWeek();
+    QList<QDate> getCurrentWeek() const;
 
-    int getCurrentTimeRow();
+    int getCurrentTimeRow() const;
 
-    int getCurrentDayOfWeek();
+    int getCurrentDayOfWeek() const;
 
 private:
     Ui::MainWindow* m_ui;
@@ -42,6 +44,8 @@ private:
     QStringList m_verticalHeaders;
     QList<QDate> m_currentWeek;
     QDate m_selectedDate;
+    QColor m_headerPrimaryColor = QColor(225, 239, 230);
+    QColor m_headerSecondaryColor = QColor(22, 12, 40);
 };
 
 #endif // WEEKLYVIEW_H
