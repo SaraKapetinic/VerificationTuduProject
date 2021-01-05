@@ -180,14 +180,15 @@ void Task::save(QString fileName) {
 
 QPixmap Task::selectIcon(int ppriority)
 {
+    QPixmap pix;
+
     if(ppriority == 0){
-        auto pix = QPixmap(":/resources/resources/png/red.png");
-        return pix;
+        pix = QPixmap(":/resources/resources/png/red.png");
     }else if(ppriority == 1){
-        auto pix = QPixmap(":/resources/resources/png/yellow.png");
-        return pix;
+        pix = QPixmap(":/resources/resources/png/yellow.png");
     }else{
-        auto pix = QPixmap(":/resources/resources/png/green.png");
-        return pix;
+        pix = QPixmap(":/resources/resources/png/green.png");
     }
+
+    return pix;
 }
