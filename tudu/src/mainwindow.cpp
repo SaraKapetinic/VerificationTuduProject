@@ -98,14 +98,13 @@ void MainWindow::receiveTuduFromJson(QString location){
     file.open(QIODevice::ReadOnly | QIODevice::Text);
 
     QJsonDocument jsonDocument = QJsonDocument::fromJson(file.readAll());
-//    file.close();
 
     auto savedTasks = jsonDocument.object();
 
     if(savedTasks.size() != 0){
         foreach(const QString& key, savedTasks.keys()){
             auto currentTask = new Task(savedTasks.value(key));
-            ui->scrollAreaWidgetContents_2->findChildren<TuduList*>()[0]->addTask(currentTask->getName(),currentTask->getDescription(),currentTask->getPriority());
+            ui->scrollAreaWidgetContents_2->findChildren<TuduList*>()[0]->addTask(currentTask);
         }
     }else{
         std::cerr << "No tasks in file" << std::endl;
