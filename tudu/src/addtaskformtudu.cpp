@@ -26,3 +26,15 @@ void AddTaskFormTudu::on_tuduTaskSave_clicked(){
 
     close();
 }
+
+void AddTaskFormTudu::setTitle(QString title){
+    ui->taskTitle->setText(title);
+}
+
+void AddTaskFormTudu::setDescription(QString description){
+    ui->taskDesc->setPlainText(description);
+}
+
+void AddTaskFormTudu::setPriority(int priority){
+    ui->taskPriority->setCurrentIndex(priority);
+}

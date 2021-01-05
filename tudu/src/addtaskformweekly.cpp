@@ -1,6 +1,5 @@
 #include "headers/addtaskformweekly.h"
 #include "ui_addtaskformweekly.h"
-#include "ui_mainwindow.h"
 #include "headers/weeklyview.h"
 #include "headers/task.h"
 
