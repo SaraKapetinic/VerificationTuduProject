@@ -177,18 +177,13 @@ void MainWindow::recieveDeleteFromTask(int row, int column){
     // Read JSON
     QJsonDocument jsonDocument = QJsonDocument::fromJson(file.readAll());
     file.close();
-    // Get array so we can see number of tasks in file
+
     auto savedTasks = jsonDocument.object();
 
-    foreach(const QString& key, savedTasks.keys()){
-        auto currentTask = new Task(savedTasks.value(key));
-        if(currentTask->getCreationTimeString() == item->data(CREATIONTIME_ROLE).toString()){
-            savedTasks.remove(key);
-            delete item;
-            ui->tableWidget->setSpan(row,column,1,1);
-            break;
-        }
-    }
+    savedTasks.remove(item->data(CREATIONTIME_ROLE).toString());
+    delete item;
+    ui->tableWidget->setSpan(row,column,1,1);
+
     QJsonDocument jsonWriteDocument;
     jsonWriteDocument.setObject(savedTasks);
     file.open(QIODevice::WriteOnly | QIODevice::Text);
