@@ -3,7 +3,7 @@
 #include "headers/addtaskformweekly.h"
 #include "headers/tudulist.h"
 #include "headers/addtaskformtudu.h"
-#include "headers/init.h"
+#include "headers/weeklyview.h"
 #include <QTextEdit>
 #include <QStandardPaths>
 #include <QFile>
@@ -14,6 +14,7 @@
 #include <QDir>
 
 QList<QDate> currentWeek;
+QDate today = QDate::currentDate();
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -27,20 +28,11 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
     // Initialization class
-    Init *init = new Init();
-
-    // Methods to set up mainwindow
-    init->setDays(ui);
-    init->setHeaders(ui);
-
-    // Make table fill entire widget
-    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    WeeklyView *week = new WeeklyView();
+    week->execute(ui);
 
     // Append to list so we can use it in cellDoubleClicked
-    for(int i=0;i<NUM_OF_WEEKDAYS;i++){
-        currentWeek.append(init->getCurrentWeek()[i]);
-    }
-
+    currentWeek.append(week->getCurrentWeek());
 
     // Load from file
     // TODO move the code below (up to 75ish) to the weekly table class

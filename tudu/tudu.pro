@@ -28,17 +28,17 @@ SOURCES += \
     src/mainwindow.cpp \
     src/tudulist.cpp \
     src/task.cpp \
-    src/init.cpp \ 
     src/addtaskformweekly.cpp \
-    src/addtaskformtudu.cpp
+    src/addtaskformtudu.cpp \
+    src/weeklyview.cpp
 
 HEADERS += \
     headers/mainwindow.h \
     headers/tudulist.h \
     headers/task.h \
-    headers/init.h \
     headers/addtaskformweekly.h \
-    headers/addtaskformtudu.h
+    headers/addtaskformtudu.h \
+    headers/weeklyview.h
 
 FORMS += \
     forms/mainwindow.ui \

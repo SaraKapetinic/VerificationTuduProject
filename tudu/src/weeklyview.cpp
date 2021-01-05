@@ -1,13 +1,20 @@
-#include "headers/init.h"
+#include "headers/weeklyview.h"
 
-Init::Init(){}
+WeeklyView::WeeklyView(QDate date)
+    :m_selectedDate(date)
+{}
 
-void Init::setDays(Ui::MainWindow* ui){
+WeeklyView::WeeklyView()
+    :m_selectedDate(QDate::currentDate())
+{}
+
+
+void WeeklyView::setDays(Ui::MainWindow* ui){
 
     QDate currentDate = ui->calendarMonths->selectedDate();
 
     // Ordinal number of current day (Monday = 1; ... ; Sunday = 7)
-    int currentDayOfWeek = getCurrentDayOfWeek(ui);
+    int currentDayOfWeek = getCurrentDayOfWeek();
 
     // Highlight current day header
     QColor headerColor = QColor(22, 12, 40);
@@ -32,10 +39,10 @@ void Init::setDays(Ui::MainWindow* ui){
 
 }
 
-void Init::setHeaders(Ui::MainWindow* ui){
+void WeeklyView::setHeaders(Ui::MainWindow* ui){
 
     // Ordinal number of current day (Monday = 1; ... ; Sunday = 7)
-    int currentDayOfWeek = getCurrentDayOfWeek(ui);
+    int currentDayOfWeek = getCurrentDayOfWeek();
 
     // Set column headers
     ui->tableWidget->setHorizontalHeaderLabels(m_horizontalHeaders);
@@ -51,21 +58,21 @@ void Init::setHeaders(Ui::MainWindow* ui){
     }
 
     ui->tableWidget->setVerticalHeaderLabels(m_verticalHeaders);
-    ui->tableWidget->verticalHeaderItem(getCurrentTimeRow(ui))->setBackground(QBrush(QColor(22, 12, 40)));
-    ui->tableWidget->verticalHeaderItem(getCurrentTimeRow(ui))->setForeground(QBrush(QColor(225, 239, 230)));
-    ui->tableWidget->setCurrentCell(getCurrentTimeRow(ui), currentDayOfWeek-1);
+    ui->tableWidget->verticalHeaderItem(getCurrentTimeRow())->setBackground(QBrush(QColor(22, 12, 40)));
+    ui->tableWidget->verticalHeaderItem(getCurrentTimeRow())->setForeground(QBrush(QColor(225, 239, 230)));
+    ui->tableWidget->setCurrentCell(getCurrentTimeRow(), currentDayOfWeek-1);
 
 }
 
-void Init::setDesign(Ui::MainWindow *ui) {
+void WeeklyView::setDesign(Ui::MainWindow *ui) {
     ui->tableWidget->setStyleSheet("background-color: red;");
 }
 
-QList<QDate> Init::getCurrentWeek() {
+QList<QDate> WeeklyView::getCurrentWeek() {
     return m_currentWeek;
 }
 
-int Init::getCurrentTimeRow(Ui::MainWindow* ui) {
+int WeeklyView::getCurrentTimeRow() {
 
     // Get current hour
     int currentHour = QTime::currentTime().hour();
@@ -78,8 +85,15 @@ int Init::getCurrentTimeRow(Ui::MainWindow* ui) {
     return 4*currentHour + minuteQuadrants;
 }
 
-int Init::getCurrentDayOfWeek(Ui::MainWindow* ui) {
-    QDate currentDate = ui->calendarMonths->selectedDate();
+int WeeklyView::getCurrentDayOfWeek() {
+    return m_selectedDate.dayOfWeek();
+}
 
-    return currentDate.dayOfWeek();
+void WeeklyView::execute(Ui::MainWindow* ui) {
+    // Methods to set up mainwindow
+    setDays(ui);
+    setHeaders(ui);
+
+    // Make table fill entire widget
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
