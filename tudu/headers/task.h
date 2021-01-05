@@ -60,6 +60,8 @@ public:
 
     void save(QString fileName);
 
+    QIcon fetchIcon(int priority);
+
 protected:
     QString name;
     QString description;
