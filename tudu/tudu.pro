@@ -44,3 +44,7 @@ FORMS += \
     forms/mainwindow.ui \
     forms/addtaskformweekly.ui \
     forms/addtaskformtudu.ui
+
+RESOURCES += \
+    resources.qrc
+

@@ -377,7 +377,24 @@ height: 20px;</string>
                 <number>0</number>
                </property>
                <item row="0" column="0">
-                <layout class="QVBoxLayout" name="verticalLayoutTUDU"/>
+                <layout class="QVBoxLayout" name="verticalLayoutTUDU">
+                 <item>
+                  <widget class="TuduList" name="listView">
+                   <property name="acceptDrops">
+                    <bool>true</bool>
+                   </property>
+                   <property name="dragEnabled">
+                    <bool>true</bool>
+                   </property>
+                   <property name="dragDropMode">
+                    <enum>QAbstractItemView::DragDrop</enum>
+                   </property>
+                   <property name="defaultDropAction">
+                    <enum>Qt::MoveAction</enum>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
               </layout>
              </widget>
@@ -394,6 +411,13 @@ height: 20px;</string>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>TuduList</class>
+   <extends>QListView</extends>
+   <header>headers/tudulist.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
