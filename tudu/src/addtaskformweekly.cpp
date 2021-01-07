@@ -33,29 +33,29 @@ AddTaskFormWeekly::~AddTaskFormWeekly()
 
 void AddTaskFormWeekly::on_pbSaveTask_clicked()
 {
+
+    // Get task title and task description based on inputted data
     QString taskTitle = ui->taskTitle->text();
     QString taskDesc = ui->taskDesc->toPlainText();
 
-    int start = ui->dateTimeStart->time().hour() * 60 + ui->dateTimeStart->time().minute();
-    int end = ui->dateTimeEnd->time().hour() * 60 + ui->dateTimeEnd->time().minute();
+    // Create span
+    // Diff end and start and divide by 15 because one cell = 15 minutes
+    int start = ui->dateTimeStart->time().hour() * MINUTES_IN_HOUR + ui->dateTimeStart->time().minute();
+    int end = ui->dateTimeEnd->time().hour() * MINUTES_IN_HOUR + ui->dateTimeEnd->time().minute();
     int span = (end - start)/15;
 
+    // If task end time is xx:15, xx:30, xx:45, xx:00 don't take the next cell
     if((end-start) % 15 == 0){
         span = span + 1;
     }else{
         span = span+2;
     }
 
-
-    std::cout << "start: " << start << std::endl << "end: " << end  << std::endl << "span: " << span << std::endl;
-
-
     // Create new task from values inputted
     Task* task = new Task(taskTitle, taskDesc, ui->dateTimeStart->dateTime(), ui->dateTimeEnd->dateTime(), DURATION_DEFAULT, PRIORITY_DEFAULT, 1);
 
     emit sendToCalendar(task, m_row, m_column, span);
-    // TODO this should not be done here...
-    // We should move the saving functionality to weekly view and tudu list classes.
+
     task->save("weekly_tasks");
 
     close();

@@ -20,7 +20,6 @@ void WeeklyView::clearView() {
         for (int j=0; j<HOURS_IN_DAY*(MINUTES_IN_HOUR/MINUTE_INCREMENTS); j++) {
             auto item = new QTableWidgetItem();
             item->setText("");
-            m_ui->tableWidget->setSpan(j, i, 1, 1);
             m_ui->tableWidget->setItem(j, i, item);
         }
     }
@@ -151,7 +150,10 @@ void WeeklyView::loadFromJson(){
                 font.setPointSize(12);
                 item->setFont(font);
                 m_ui->tableWidget->setItem(taskRow, taskColumn, item);
-                m_ui->tableWidget->setSpan(taskRow, taskColumn, span+2, 1);
+                if(span > 1){
+                    m_ui->tableWidget->setSpan(taskRow, taskColumn, span+2, 1);
+                }
+
             }
         }
     }else{

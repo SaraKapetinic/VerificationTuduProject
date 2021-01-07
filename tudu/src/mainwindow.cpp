@@ -50,7 +50,8 @@ void MainWindow::loadTuduFromJson(){
     QString fileLocation = path.arg(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
 
     QFile file(fileLocation);
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
+
+
 
     QJsonDocument jsonDocument = QJsonDocument::fromJson(file.readAll());
 
@@ -61,15 +62,12 @@ void MainWindow::loadTuduFromJson(){
             auto currentTask = new Task(savedTasks.value(key));
             ui->scrollAreaWidgetContents_2->findChildren<TuduList*>()[0]->addTask(currentTask);
         }
-    }else{
-        std::cerr << "No tasks in file" << std::endl;
     }
     file.close();
 }
 
 void MainWindow::on_addTaskButtonClicked()
 {
-//    qDebug("Adding a new task to TUDU");
     AddTaskFormTudu *tDialog = new AddTaskFormTudu(this);
     connect(tDialog, SIGNAL(sendToTuduList(QString, QString, int)), this, SLOT(recieveInTuduList(QString, QString, int)));
     tDialog->setModal(true);
@@ -83,22 +81,21 @@ MainWindow::~MainWindow()
 
 void MainWindow::recieveFromTask(Task* task, int row, int column, int span){
 
-    // Show taskTitle in daily view
-//    auto model = ui->tableWidget->model();
-//    model->setData(model->index(row, column), task->getName());
-
     auto item = new QTableWidgetItem();
 
     // Make current cell uneditable
-//    QTableWidgetItem* item = ui->tableWidget->item(row, column);
     item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+
+    // Set task data to cell
     item->setData(NAME_ROLE, QVariant::fromValue<QString>(task->getName()));
     item->setData(ENDTIME_ROLE, QVariant::fromValue<QDateTime>(task->getEndTime()));
     item->setData(DESCRIPTION_ROLE, QVariant::fromValue<QString>(task->getDescription()));
     item->setData(CREATIONTIME_ROLE,QVariant::fromValue<QString>(task->getCreationTimeString()));
+
+    // Set text to be displayed in cell
     item->setText(task->getName());
 
-    // Set color of scheduled task
+    // Set color of scheduled task and set font
     QColor taskColor = QColor(239, 138, 23);
     item->setBackground(taskColor);
     item->setTextAlignment(Qt::AlignCenter);
@@ -106,6 +103,8 @@ void MainWindow::recieveFromTask(Task* task, int row, int column, int span){
     font.setFamily("Ubuntu");
     font.setPointSize(12);
     item->setFont(font);
+
+    // Item to table
     ui->tableWidget->setItem(row, column, item);
     ui->tableWidget->setSpan(row, column, span, 1);
 
@@ -114,9 +113,11 @@ void MainWindow::recieveFromTask(Task* task, int row, int column, int span){
 void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
 {
 
+    // Take selected time and date based on row and column (cell) clicked
     QTime time = QTime::fromString(ui->tableWidget->verticalHeaderItem(row)->text(), "hh:mm");
     QDate date = week->getCurrentWeek().at(column);
 
+    // Initialize object for a new form
     AddTaskFormWeekly *mDialog = new AddTaskFormWeekly(this, time, date, row, column);
     mDialog->setWindowTitle("Add New Task");
 
@@ -138,6 +139,8 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
 }
 void MainWindow::recieveDeleteFromTask(int row, int column){
     auto item = ui->tableWidget->takeItem(row, column);    
+
+    // If item exists in table, delete it from file
     if(item != nullptr){
         QString fileLocation = QString("%1/weekly_tasks.json")
                 .arg(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
@@ -166,7 +169,6 @@ void MainWindow::recieveDeleteFromTask(int row, int column){
 
 void MainWindow::on_calendarMonths_activated(const QDate &date)
 {
-//    week->saveTasksToJson();
     week = new WeeklyView(ui, date);
     week->execute();
 
@@ -209,7 +211,7 @@ void MainWindow::on_listView_doubleClicked(const QModelIndex &index)
             this, SLOT(recieveInTuduList(QString, QString, int)));
 
     removeFromJson(index.data(CREATIONTIME_ROLE).toString(), QString("tuduList_tasks"));
-    // TODO Edit task insted of removing it...
+
     ui->scrollAreaWidgetContents_2->findChildren<TuduList*>()[0]->model()->removeRow(index.row());
     tDialog->setModal(true);
     tDialog->exec();

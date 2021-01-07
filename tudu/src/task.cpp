@@ -68,7 +68,6 @@ Task::Task(Task &obj) :
     this->description = obj.description;
     this->startTime = obj.startTime;
     this->endTime = obj.endTime;
-    // TODO should we copy the creation time?
     this->creationTime = obj.creationTime;
     this->duration = obj.duration;
     this->priority = obj.priority;
@@ -152,14 +151,13 @@ void Task::setPriority(const qint32 &value)
 
 void Task::save(QString fileName) {
 
-    // TODO add a check if the file name is valid
-
+    // Open file for saving
     QString saveLocation = QString("%1/%2.json")
             .arg(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation), fileName);
-    std::cout<<saveLocation.toStdString();
     QFile file(saveLocation);
     file.open(QIODevice::ReadOnly);
 
+    // Prepare to write to json
     QJsonDocument jsonDocument = QJsonDocument::fromJson(file.readAll());
     file.close();
 
@@ -175,9 +173,11 @@ void Task::save(QString fileName) {
                qMakePair(QString("priority"),  QJsonValue(this->getPriority())),
             });
 
+    // Create a json array and add to it with key being creation time, and value being task object
     auto jsonArray = jsonDocument.object();
     jsonArray.insert(creationTime, data);
 
+    // Write to document
     QJsonDocument final_doc(jsonArray);
     file.open(QIODevice::WriteOnly);
     file.write(final_doc.toJson());
