@@ -61,6 +61,8 @@ Iz liste obaveze možete premestiti u nedeljni kalendar i tako na pregledan nač
   - Korisnik klikće na dugme `Save`
 - Aplikacija na odgovarajuć način čuva izmenjen task
 
+![](dijagram_sekvenci_azuriranje_taska.png)
+
 ### Prebacivanje taska iz Tudu liste
 
 **Opis:** Korisnik task iz tudu liste prebacuje u nedeljni pregled
