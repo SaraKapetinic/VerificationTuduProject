@@ -23,9 +23,61 @@ Iz liste obaveze možete premestiti u nedeljni kalendar i tako na pregledan nač
 
 
 
-## Slučaj upotrebe - unos novog događaja
+## Slučajevi upotrebe
 
-(+ odgovarajući dijagrami sekvenci)
+### Unos taska u Tudu listu
+
+**Opis:** Korisnik unosi novi task u Tudu listu
+
+**Pretpostavke:** Pokrenuta aplikacija
+
+**Ishodi:** Željeni task se na odgovarajuć način prikazuje u Tudu listi
+
+**Tok:**
+
+- Korisnik klikom na dugme `Add task` započinje dodavanje taska
+- Otvara se prozor koji sadrži formu za unos taska
+  - Korisnik unosi naslov i prioritet
+  - Korisnik opciono unosi opis
+  - Korisnik klikće na dugme `Save`
+- Aplikacija na odgovarajuć način čuva željeni task
+- Aplikacija adekvatno prikazuje dodati task u Tudu listi
+
+![](dijagram_sekvenci_unos_novog_taska.png)
+
+### Ažuriranje taska
+
+**Opis:** Korisnik azurira proizvoljan task u Tudu listi
+
+**Pretpostavke:** Pokrenuta aplikacija
+
+**Ishodi:** Željeni task menja podatke koji se u njemu nalaze
+
+**Tok:**
+
+- Korisnik dvoklikom na task započinje ažuriranje
+- Otvara se prozor koji sadrži formu za ažuriranje taska
+  - Korisnik menja naslov, prioritet i/ili opis
+  - Korisnik klikće na dugme `Save`
+- Aplikacija na odgovarajuć način čuva izmenjen task
+
+### Prebacivanje taska iz Tudu liste
+
+**Opis:** Korisnik task iz tudu liste prebacuje u nedeljni pregled
+
+**Pretpostavke:** Pokrenuta aplikacija, otvoren nedeljni pregled
+
+**Ishodi:** Željeni događaj se prikazuje na odgovarajucem mestu u nedeljnom pregledu
+
+**Tok:**
+
+- Korisnik pozicionira kursor na željeni task i klikne i drži
+- Korisnik prevlači task na odgovarajuce mesto u nedeljnom pregledu
+- Aplikacija na odgovarajuć način čuva željeni događaj
+- Aplikacija adekvatno prikazuje dodati događaj u nedeljnom pregledu
+
+
+### Unos novog događaja
 
 **Opis:** Korisnik unosi novi događaj u nedeljni pregled
 
@@ -47,8 +99,7 @@ Iz liste obaveze možete premestiti u nedeljni kalendar i tako na pregledan nač
 
 **Dijagram sekvenci:**
 
-![](dijagram_sekvenci_1.png)
-
+![](dijagram_sekvenci_unos_novog_dogadjaja.png)
 
 
 ## Dijagram glavnih implementiranih klasa
