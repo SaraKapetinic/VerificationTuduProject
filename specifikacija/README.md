@@ -122,6 +122,9 @@ Iz liste obaveze možete premestiti u nedeljni kalendar i tako na pregledan nač
 
 ![](dijagram_klasa.png)
 
+## Dijagram komponenti
+
+![](dijagram_komponenti.png)
 
 
 
