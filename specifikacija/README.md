@@ -99,9 +99,23 @@ Iz liste obaveze možete premestiti u nedeljni kalendar i tako na pregledan nač
 - Aplikacija na odgovarajuć način čuva željeni događaj
 - Aplikacija adekvatno prikazuje dodati događaj u nedeljnom pregledu 
 
-**Dijagram sekvenci:**
-
 ![](dijagram_sekvenci_unos_novog_dogadjaja.png)
+
+
+### Prlazak iz mesečnog pregleda u nedeljni pregled
+
+**Opis:** Korisnik prelazi iz mesečnog pregleda u nedeljni pregled
+
+**Pretpostavke:** Pokrenuta aplikacija, otvoren mesečni pregled
+
+**Ishodi:** Korisnik se nalazi u nedeljnom pregledu
+
+**Tok:**
+
+- Korisnik pozicionira kursor na željeni dan u mesečnom pregledu i dvoklikne na njega
+- Aplikacija otvara karticu sa nedeljnim pregledom i obeležava polje odabranog dana na mestu trenutnog vremena korisnikove mašine
+
+![](dijagram_sekvenci_prelazak_iz_mesecnog_u_nedeljni.png)
 
 
 ## Dijagram glavnih implementiranih klasa
