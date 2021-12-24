@@ -43,6 +43,8 @@ Iz liste obaveze možete premestiti u nedeljni kalendar i tako na pregledan nač
 - Aplikacija na odgovarajuć način čuva željeni task
 - Aplikacija adekvatno prikazuje dodati task u Tudu listi
 
+![](dijagram_sekvenci_unos_novog_taska.png)
+
 ### Ažuriranje taska
 
 **Opis:** Korisnik azurira proizvoljan task u Tudu listi
